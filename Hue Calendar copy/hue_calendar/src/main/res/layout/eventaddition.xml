@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/background">
+
+    <EditText
+        android:id="@+id/textfieldone"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:hint="Event Name"
+        android:inputType="text|textCapWords|textAutoCorrect"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+
+    <TextView android:id="@+id/timeDisplay"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/textfieldone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="11dp"/>
+
+    <Button android:id="@+id/pickTime"
+        android:layout_below="@+id/timeDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pickTime"
+        android:layout_marginStart="10dp"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="400dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="#000000"
+        android:layout_below="@+id/pickTime"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="2dp"/>
+
+    <TextView android:id="@+id/timeDisplay2"
+        android:layout_below="@+id/line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="11dp"/>
+
+    <Button android:id="@+id/pickTime2"
+        android:layout_below="@+id/timeDisplay2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pickTime"
+        android:layout_marginStart="11dp"/>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="400dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="#000000"
+        android:layout_below="@+id/pickTime2"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="2dp"/>
+
+    <TextView android:id="@+id/dateDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line2"
+        android:text="@string/askDate"
+        android:textSize="18sp"
+        android:layout_marginStart="11dp"/>
+
+    <Button
+        android:layout_below="@+id/dateDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pickDate"
+        android:text="@string/pickDate"
+        android:layout_marginStart="11dp"/>
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="400dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="#000000"
+        android:layout_below="@+id/pickDate"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="2dp"/>
+
+    <TextView android:id="@+id/dateDisplay2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line4"
+        android:text="@string/askDate2"
+        android:textSize="18sp"
+        android:layout_marginStart="11dp"/>
+
+    <Button
+        android:layout_below="@+id/dateDisplay2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pickDate2"
+        android:text="@string/pickDate"
+        android:layout_marginStart="11dp"/>
+
+    <View
+        android:id="@+id/line5"
+        android:layout_width="400dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="#000000"
+        android:layout_below="@+id/pickDate2"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="2dp"/>
+
+    <EditText android:id="@+id/tagField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line5"
+        android:hint="Tag"
+        android:text="@string/tagField"
+        android:layout_marginStart="11dp"
+        />
+
+    <EditText android:id="@+id/repeatField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tagField"
+        android:hint="Repeat"
+        android:text="@string/repeatField"
+        android:layout_marginStart="11dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonadd"
+            android:id="@+id/buttonadd"
+            android:layout_below="@+id/textfieldfour"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/buttoncancel"
+            android:id="@+id/buttoncancel"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/buttonadd"
+            android:layout_below="@+id/textfieldfour"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

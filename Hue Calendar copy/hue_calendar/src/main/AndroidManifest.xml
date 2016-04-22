@@ -32,10 +32,6 @@
         </activity>
 
         <activity
-            android:name=".EventAdditionTestFunction"
-            android:label="@string/event_addition">
-        </activity>
-        <activity
             android:name=".EventAddition"
             android:label="@string/event_addition">
         </activity>
@@ -60,6 +56,11 @@
 
         <activity
             android:name=".PHBulbActivity"
+            android:label="@string/home_activity">
+        </activity>
+
+        <activity
+            android:name=".TestControlActivity"
             android:label="@string/home_activity">
         </activity>
 

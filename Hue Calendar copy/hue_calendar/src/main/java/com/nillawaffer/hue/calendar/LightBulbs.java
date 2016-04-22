@@ -106,7 +106,7 @@ public class LightBulbs extends AppCompatActivity {
         imagebutton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LightBulbs.this, PHHomeActivity.class);
+                Intent intent = new Intent(LightBulbs.this, TestControlActivity.class);
                 //intent.putExtra("pushName", label2.getText());
                 startActivity(intent);
             }

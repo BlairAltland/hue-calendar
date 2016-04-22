@@ -10,13 +10,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+
 import java.util.Calendar;
 
 public class EventAddition extends AppCompatActivity {
+
+
+    private EditText eventName;
+    private EditText tagName;
+    private EditText eventRepeat;
 
     private TextView displayTime;
     private Button pickTime;
@@ -39,9 +48,16 @@ public class EventAddition extends AppCompatActivity {
     private TextView displayDate2;
     private Button pickDate2;
 
+    private TextView displayTime2;
+    private Button pickTime2;
+
+    private int pHour2;
+    private int pMinute2;
+    /** This integer will uniquely define the dialog to be used for displaying time picker.*/
+    static final int TIME_DIALOG_ID2 = 1;
+
     Button addButton;
     Button cancelButton;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +68,12 @@ public class EventAddition extends AppCompatActivity {
 
         //add tappablity
         addListenerOnButton();
+
+        addButton = (Button) findViewById(R.id.buttonadd);
+
+        eventName = (EditText) findViewById(R.id.textfieldone);
+        tagName = (EditText) findViewById(R.id.tagField);
+        eventRepeat = (EditText) findViewById(R.id.repeatField);
 
         /** Capture our View elements */
         displayTime = (TextView) findViewById(R.id.timeDisplay);
@@ -220,6 +242,44 @@ public class EventAddition extends AppCompatActivity {
                         .append(monthh2).append(" ")
                         .append(day2).append(", ").append(year2));
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventDB myDbHelper = new EventDB(getApplicationContext());
+                SQLiteDatabase db = myDbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+
+                values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_TIME, displayTime.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_TIME, displayTime2.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_DATE, displayDate.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_DATE, displayDate2.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_REPEAT, eventRepeat.getText().toString());
+
+                // insert the values into the database
+                long newRowId = db.insert(Events.SubmitEvent.TABLE_NAME, null, values);
+
+                // toast for new data
+                int duration = Toast.LENGTH_LONG;
+                String result;
+
+                // check if data was inserted
+                if (newRowId != -1) {
+                    result = "New Event Added";
+                } else {
+                    result = "Error";
+                }
+
+                Toast toast = Toast.makeText(getApplicationContext(), result, duration);
+                toast.show();
+
+                eventName.setText("");
+                tagName.setText("");
+                eventRepeat.setText("");
+
+            }
+        });
     }
 
     /** Callback received when the user "picks" a time in the dialog */
@@ -294,7 +354,6 @@ public class EventAddition extends AppCompatActivity {
             };
 
 
-
     /** Add padding to numbers less than ten */
     private static String pad(int c) {
         if (c >= 10)
@@ -302,7 +361,6 @@ public class EventAddition extends AppCompatActivity {
         else
             return "0" + String.valueOf(c);
     }
-
 
     /** Create a new dialog for time picker */
 
@@ -328,13 +386,7 @@ public class EventAddition extends AppCompatActivity {
         return null;
     }
 
-    private TextView displayTime2;
-    private Button pickTime2;
 
-    private int pHour2;
-    private int pMinute2;
-    /** This integer will uniquely define the dialog to be used for displaying time picker.*/
-    static final int TIME_DIALOG_ID2 = 1;
 
     /** Callback received when the user "picks" a time in the dialog */
     private TimePickerDialog.OnTimeSetListener mTimeSetListener2 =

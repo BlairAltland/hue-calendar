@@ -52,5 +52,6 @@
             android:title="@string/menu_find_bridge"
             android:showAsAction="ifRoom"/>
 
+
     </group>
 </menu>

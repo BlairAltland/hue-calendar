@@ -124,8 +124,8 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 }
                 return true;
 
-            case R.id.light_bulbs:
-                Intent intent4 = new Intent(this, LightBulbs.class);
+            case R.id.PHbulbActivity:
+                Intent intent4 = new Intent(this, PHBulbActivity.class);
                 startActivity(intent4);
                 return true;
         }

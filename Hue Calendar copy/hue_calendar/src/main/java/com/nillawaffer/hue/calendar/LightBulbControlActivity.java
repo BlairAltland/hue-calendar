@@ -46,6 +46,8 @@ public class LightBulbControlActivity extends AppCompatActivity {
     String bulbName = "Mood";
     Switch onOffSwitch;
 
+    String name;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -57,6 +59,8 @@ public class LightBulbControlActivity extends AppCompatActivity {
         phHueSDK = PHHueSDK.create();
 
 
+        setLabels();
+        
         //Seek bar code
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setMax(254);
@@ -384,6 +388,15 @@ public class LightBulbControlActivity extends AppCompatActivity {
         public void onSearchComplete() {}
     };
 
+    public void setLabels() {
+
+        Bundle extras = getIntent().getExtras();
+
+        name = extras.getString("pushName");
+
+        TextView nameField = (TextView) findViewById(R.id.name);
+        nameField.setText(name);
+    }
     private void changeBackgroundColor(int selectedColor) {
         currentBackgroundColor = selectedColor;
         root.setBackgroundColor(selectedColor);

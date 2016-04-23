@@ -52,6 +52,10 @@
             android:title="@string/menu_find_bridge"
             android:showAsAction="ifRoom"/>
 
+        <item android:id="@+id/PHbulbActivity"
+            android:title="@string/menu_find_bridge"
+            android:showAsAction="ifRoom"/>
+
 
     </group>
 </menu>

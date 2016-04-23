@@ -56,10 +56,6 @@ public class LightBulbs extends AppCompatActivity {
 
     Button doneButton;
 
-    TextView[] textViews = {label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12};
-
-    ImageButton[] buttons = {imagebutton1, imagebutton2, imagebutton3, imagebutton4, imagebutton5, imagebutton6, imagebutton7, imagebutton8,
-            imagebutton9, imagebutton10, imagebutton11, imagebutton12};
 
     LightBulbControlActivity control = new LightBulbControlActivity();
 
@@ -84,8 +80,131 @@ public class LightBulbs extends AppCompatActivity {
             }
         });
 
-        //control.setImageButtonResources(label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12);
+        setImageButtonResources(label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12);
     }
+
+    public void setImageButtonResources(TextView label1, TextView label2, TextView label3, TextView label4,
+                                        TextView label5,TextView label6, TextView label7, TextView label8 ,TextView label9, TextView label10, TextView label11, TextView label12) {
+
+        //create array of all of the bulbs on the network
+        //loop through the array of bulbs and fill them with images
+        PHBridge bridge = phHueSDK.getSelectedBridge();
+
+        List<PHLight> allLights = bridge.getResourceCache().getAllLights();
+
+        List<PHLight> Lights = allLights;
+
+
+        try {
+            PHLight light1 = Lights.get(0);
+            String label1Text = light1.getName();
+            label1.setText(label1Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+
+        try {
+            PHLight light2 = Lights.get(1);
+            String label2Text = light2.getName();
+            label2
+                    .setText(label2Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+
+        try {
+            PHLight light3 = Lights.get(2);
+            String label3Text = light3.getName();
+            label3.setText(label3Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+
+        try {
+            PHLight light4 = Lights.get(3);
+            String label4Text = light4.getName();
+            label4.setText(label4Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+
+        try {
+            PHLight light5 = Lights.get(4);
+            String label5Text = light5.getName();
+            label5.setText(label5Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+
+        try {
+            PHLight light6 = Lights.get(5);
+            String label6Text = light6.getName();
+            label6.setText(label6Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+        try {
+            PHLight light7 = Lights.get(6);
+            String label7Text = light7.getName();
+            label7.setText(label7Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+        try {
+            PHLight light8 = Lights.get(7);
+            String label8Text = light8.getName();
+            label1.setText(label8Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+        try {
+            PHLight light9 = Lights.get(8);
+            String label9Text = light9.getName();
+            label9.setText(label9Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+        try {
+            PHLight light10 = Lights.get(9);
+            String label10Text = light10.getName();
+            label10.setText(label10Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+        try {
+            PHLight light11 = Lights.get(10);
+            String label11Text = light11.getName();
+            label11.setText(label11Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+        try {
+            PHLight light12 = Lights.get(11);
+            String label12Text = light12.getName();
+            label12.setText(label12Text);
+        } catch ( IndexOutOfBoundsException e ) {
+
+        }
+
+
+
+
+
+        /*
+        for (TextView text : textViews){
+
+            for (PHLight light : Lights) {
+
+
+                text.setText(light.getName());
+                //Lights.remove(Lights.size() - 1);
+            }
+        }
+           */
+        //if lights(0) != null
+        //label1 = lights(0)
+    }
+
 
     public void addListenerOnButton() {
 
@@ -96,7 +215,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, PHHomeActivity.class);
-                //intent.putExtra("pushName", label1.getText());
+                intent.putExtra("pushName", label1.getText());
                 startActivity(intent);
 
             }
@@ -107,7 +226,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, TestControlActivity.class);
-                //intent.putExtra("pushName", label2.getText());
+                intent.putExtra("pushName", label2.getText());
                 startActivity(intent);
             }
         });

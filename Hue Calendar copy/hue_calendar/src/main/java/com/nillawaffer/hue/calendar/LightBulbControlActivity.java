@@ -60,7 +60,7 @@ public class LightBulbControlActivity extends AppCompatActivity {
 
 
         setLabels();
-        
+
         //Seek bar code
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setMax(254);
@@ -68,7 +68,6 @@ public class LightBulbControlActivity extends AppCompatActivity {
         ImageButton bulbButton;
         bulbButton = (ImageButton) findViewById(R.id.image);
 
-        doneButton = (Button) findViewById(R.id.doneButton);
         onOffSwitch = (Switch) findViewById(R.id.switch1);
 
         //Set up code
@@ -76,16 +75,8 @@ public class LightBulbControlActivity extends AppCompatActivity {
         setInitialBrightness();
         changeBackgroundColor(currentBackgroundColor);
         setSwitchPosition();
-
-
-        doneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LightBulbControlActivity.this, LightBulbs.class);
-                startActivity(intent);
-            }
-        });
-
+        
+        addListenerOnButton();
         //On off switch code
 
         bulbButton.setOnClickListener(new OnClickListener() {
@@ -388,6 +379,17 @@ public class LightBulbControlActivity extends AppCompatActivity {
         public void onSearchComplete() {}
     };
 
+    public void addListenerOnButton() {
+
+        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
     public void setLabels() {
 
         Bundle extras = getIntent().getExtras();
@@ -404,6 +406,7 @@ public class LightBulbControlActivity extends AppCompatActivity {
 
     private void toast(String text) {
     }
+
 
     @Override
     protected void onDestroy() {

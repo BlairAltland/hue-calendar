@@ -71,15 +71,6 @@ public class LightBulbs extends AppCompatActivity {
 
         phHueSDK = PHHueSDK.create();
 
-        doneButton = (Button) findViewById(R.id.doneButton);
-        doneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LightBulbs.this, BasicActivity.class);
-                startActivity(intent);
-            }
-        });
-
         setImageButtonResources(label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12);
     }
 
@@ -207,6 +198,14 @@ public class LightBulbs extends AppCompatActivity {
 
 
     public void addListenerOnButton() {
+
+        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         //set the intents for all of the images: launch the color picker for each respective bulb

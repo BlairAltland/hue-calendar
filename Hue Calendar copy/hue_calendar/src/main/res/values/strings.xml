@@ -16,6 +16,7 @@
     <string name="hue_functions">Test Functions</string>
     <string name="home_activity">Home Activity</string>
     <string name="push_link">Push Link</string>
+    <string name="tag_activity">Tags</string>
 
     <string name="done_button">Done</string>
     <string name="lighton">On</string>

@@ -52,8 +52,14 @@
             android:title="@string/menu_find_bridge"
             android:showAsAction="ifRoom"/>
 
+        //8
         <item android:id="@+id/PHbulbActivity"
-            android:title="@string/menu_find_bridge"
+            android:title="@string/light_bulbs"
+            android:showAsAction="ifRoom"/>
+
+        //9
+        <item android:id="@+id/TagAdditionActivity"
+            android:title="@string/tag_activity"
             android:showAsAction="ifRoom"/>
 
 

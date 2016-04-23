@@ -56,13 +56,16 @@
 
         <activity
             android:name=".PHBulbActivity"
-            android:label="@string/home_activity">
+            android:label="@string/light_bulbs">
         </activity>
 
         <activity
-            android:name=".TestControlActivity"
-            android:label="@string/home_activity">
+            android:name=".TagAdditionActivity"
+            android:label="@string/tag_activity">
         </activity>
+
+
+
 
 
     </application>

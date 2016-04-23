@@ -74,7 +74,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         getMenuInflater().inflate(R.menu.main, menu);
 
         menu.getItem(0).setVisible(false);
+        menu.getItem(8).setVisible(false);
         menu.getItem(7).setVisible(false);
+        menu.getItem(6).setVisible(false);
 
         return true;
     }
@@ -125,8 +127,13 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 return true;
 
             case R.id.PHbulbActivity:
-                Intent intent4 = new Intent(this, PHBulbActivity.class);
-                startActivity(intent4);
+                Intent intent = new Intent(this, PHBulbActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.TagAdditionActivity:
+                intent = new Intent(this,TagAdditionActivity.class);
+                startActivity(intent);
                 return true;
         }
 

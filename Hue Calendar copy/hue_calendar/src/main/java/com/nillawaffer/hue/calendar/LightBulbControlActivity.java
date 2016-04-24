@@ -43,7 +43,7 @@ public class LightBulbControlActivity extends AppCompatActivity {
     public static final String TAG = "Hue Calendar";
     SeekBar seekBar;
     Button doneButton;
-    String bulbName = "Mood";
+    String bulbName = "Hue bloom 1";
     Switch onOffSwitch;
 
     String name;
@@ -59,7 +59,7 @@ public class LightBulbControlActivity extends AppCompatActivity {
         phHueSDK = PHHueSDK.create();
 
 
-        setLabels();
+        //setLabels();
 
         //Seek bar code
         seekBar = (SeekBar) findViewById(R.id.seekBar);

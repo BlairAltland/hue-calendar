@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    //App files
+    <string name="app_name">Hue Calendar</string>
     <color name="background">#76e6e2</color>
 
-    <string name="app_name">Hue Calendar</string>
+    //Activities
     <string name="action_today">Today</string>
     <string name="action_day_view">Day view</string>
     <string name="action_three_day_view">3 day view</string>
     <string name="action_week_view">Week view</string>
-    <string name="color_picker">Color Picker</string>
     <string name="calendar">Calendar View</string>
     <string name="light_bulbs">Light Bulbs</string>
     <string name="event_detail">Event Info</string>
@@ -18,10 +19,10 @@
     <string name="push_link">Push Link</string>
     <string name="tag_activity">Tags</string>
 
+    //Buttons
     <string name="done_button">Done</string>
     <string name="lighton">On</string>
     <string name="lightoff">Off</string>
-
     <string name="imgbutton1">Bedroom Main</string>
     <string name="imgbutton2">Bedroom Side</string>
     <string name="imgbutton3">Nightstand </string>
@@ -36,7 +37,7 @@
     <string name="imgbutton12">Office</string>
     <string name="backbutton">Back</string>
 
-    <string name="action_settings">Settings</string>
+    //Hue Strings
     <string name="no_bridge">No Bridge Found.   Start Bridge Search</string>
     <string name="btn_refresh">Refresh</string>
     <string name="btn_find_bridge">Find new bridge</string>
@@ -74,4 +75,6 @@
     <string name="askTime2">End Time</string>
     <string name="tagField">Tag</string>
     <string name="repeatField">Repeat</string>
+
+    <string name="color_picker">Color Picker</string>
 </resources>

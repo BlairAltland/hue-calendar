@@ -76,5 +76,9 @@
     <string name="tagField">Tag</string>
     <string name="repeatField">Repeat</string>
 
+    //Activity_bulb_detail
+    <string name="bulb">Bulb</string>
+    <string name="onoff">On/Off</string>
+
     <string name="color_picker">Color Picker</string>
 </resources>

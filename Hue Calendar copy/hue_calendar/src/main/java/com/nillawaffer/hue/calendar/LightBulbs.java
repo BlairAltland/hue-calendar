@@ -56,29 +56,34 @@ public class LightBulbs extends AppCompatActivity {
     TextView label11;
     TextView label12;
 
+    //PHBridge bridge = phHueSDK.getSelectedBridge();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light_bulb_view);
         setTitle("Home");
 
-        //setLabelText();
-        setImageButtonContent();
+        instantiateObjects();
 
+        //Create the labels
+        setLabelsBlank();
+        setLabelText();
+
+        setImageButtonContent();
+        //setLabelsFromBridge();
         addListenerOnButton();
 
         phHueSDK = PHHueSDK.create();
 
-        //setImageButtonResources(label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12);
     }
 
-    public void setImageButtonResources(TextView label1, TextView label2, TextView label3, TextView label4,
-                                        TextView label5,TextView label6, TextView label7, TextView label8 ,TextView label9, TextView label10, TextView label11, TextView label12) {
+    public void setLabelsFromBridge() {
 
         //create array of all of the bulbs on the network
         //loop through the array of bulbs and fill them with images
-        PHBridge bridge = phHueSDK.getSelectedBridge();
 
+        PHBridge bridge = phHueSDK.getSelectedBridge();
         List<PHLight> allLights = bridge.getResourceCache().getAllLights();
 
         try {
@@ -205,7 +210,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
-                //intent.putExtra("pushName", "mood");
+                intent.putExtra("pushName", label1.getText());
                 startActivity(intent);
 
             }
@@ -216,7 +221,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
-                //intent.putExtra("pushName", label2.getText());
+                intent.putExtra("pushName", label2.getText());
                 startActivity(intent);
             }
         });
@@ -226,7 +231,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
-                //intent.putExtra("pushName", label3.getText());
+                intent.putExtra("pushName", label3.getText());
                 startActivity(intent);
             }
         });
@@ -236,7 +241,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
-                //intent.putExtra("pushName", label4.getText());
+                intent.putExtra("pushName", label4.getText());
                 startActivity(intent);
             }
         });
@@ -246,7 +251,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, PHHomeActivity.class);
-                //intent.putExtra("pushName", label5.getText());
+                intent.putExtra("pushName", label5.getText());
                 startActivity(intent);
             }
         });
@@ -256,7 +261,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
-                //intent.putExtra("pushName", label6.getText());
+                intent.putExtra("pushName", label6.getText());
                 startActivity(intent);
             }
         });
@@ -266,6 +271,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
+                intent.putExtra("pushName", label7.getText());
                 startActivity(intent);
             }
         });
@@ -275,6 +281,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
+                intent.putExtra("pushName", label8.getText());
                 startActivity(intent);
             }
         });
@@ -284,6 +291,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                intent.putExtra("pushName", label9.getText());
                 startActivity(intent);
             }
         });
@@ -293,6 +301,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                intent.putExtra("pushName", label10.getText());
                 startActivity(intent);
             }
         });
@@ -301,6 +310,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                intent.putExtra("pushName", label11.getText());
                 startActivity(intent);
             }
         });
@@ -309,6 +319,7 @@ public class LightBulbs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                intent.putExtra("pushName", label12.getText());
                 startActivity(intent);
             }
         });
@@ -354,8 +365,7 @@ public class LightBulbs extends AppCompatActivity {
         }
     }
 
-    public void setImageButtonContent() {
-
+    public void setLabelsBlank() {
 
         label1 = (TextView) findViewById(R.id.label1);
         label1.setText("");
@@ -392,11 +402,9 @@ public class LightBulbs extends AppCompatActivity {
 
         label12 = (TextView) findViewById(R.id.label12);
         label12.setText("");
+    }
 
-        //setLabelText();
-        //setImageButtonResources(label1, label2, label3, label4, label5, label6, label7,
-                //label8, label9, label10, label11, label12);
-/*
+    public void setImageButtonContent() {
 
         if (label1.getText().length() < 1) {
             imagebutton1.setVisibility(View.INVISIBLE);
@@ -435,19 +443,59 @@ public class LightBulbs extends AppCompatActivity {
         if (label12.getText().length() < 1) {
             imagebutton12.setVisibility(View.INVISIBLE);
         }
+    }
 
+    public void instantiateObjects() {
 
+        imagebutton1 = (ImageButton) findViewById(R.id.imageButton);
+        imagebutton2 = (ImageButton) findViewById(R.id.imageButton2);
+        imagebutton3 = (ImageButton) findViewById(R.id.imageButton3);
+        imagebutton4 = (ImageButton) findViewById(R.id.imageButton4);
+        imagebutton5 = (ImageButton) findViewById(R.id.imageButton5);
+        imagebutton6 = (ImageButton) findViewById(R.id.imageButton6);
+        imagebutton7 = (ImageButton) findViewById(R.id.imageButton7);
+        imagebutton8 = (ImageButton) findViewById(R.id.imageButton8);
+        imagebutton9 = (ImageButton) findViewById(R.id.imageButton9);
+        imagebutton10 = (ImageButton) findViewById(R.id.imageButton10);
+        imagebutton11 = (ImageButton) findViewById(R.id.imageButton11);
+        imagebutton12 = (ImageButton) findViewById(R.id.imageButton12);
 
-        /*
-        for (TextView text : textViews) {
-            for (ImageButton button : buttons){
+        label1 = (TextView) findViewById(R.id.label1);
+        label1.setText("");
 
-                if (text.getText().length() < 1) {
-                    button.setVisibility(View.INVISIBLE);
-                }
-            }
-        }
-        */
+        label2 = (TextView) findViewById(R.id.label2);
+        label2.setText("");
+
+        label3 = (TextView) findViewById(R.id.label3);
+        label3.setText("");
+
+        label4 = (TextView) findViewById(R.id.label4);
+        label4.setText("");
+
+        label5 = (TextView) findViewById(R.id.label5);
+        label5.setText("");
+
+        label6 = (TextView) findViewById(R.id.label6);
+        label6.setText("");
+
+        label7 = (TextView) findViewById(R.id.label7);
+        label7.setText("");
+
+        label8 = (TextView) findViewById(R.id.label8);
+        label8.setText("");
+
+        label9 = (TextView) findViewById(R.id.label9);
+        label9.setText("");
+
+        label10 = (TextView) findViewById(R.id.label10);
+        label10.setText("");
+
+        label11 = (TextView) findViewById(R.id.label11);
+        label11.setText("");
+
+        label12 = (TextView) findViewById(R.id.label12);
+        label12.setText("");
+
     }
 
     public void setLabelText() {

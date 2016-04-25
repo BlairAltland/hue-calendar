@@ -43,10 +43,10 @@ public class LightBulbControlActivity extends AppCompatActivity {
     public static final String TAG = "Hue Calendar";
     SeekBar seekBar;
     Button doneButton;
-    String bulbName = "Hue bloom 1";
+    //String bulbName = "Hue bloom 1";
     Switch onOffSwitch;
 
-    String name;
+    String bulbName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,11 @@ public class LightBulbControlActivity extends AppCompatActivity {
 
         phHueSDK = PHHueSDK.create();
 
+        Bundle extras = getIntent().getExtras();
+        bulbName = extras.getString("pushName");
+
+        TextView nameField = (TextView) findViewById(R.id.nameLabel);
+        nameField.setText(bulbName);
 
         //setLabels();
 
@@ -394,10 +399,10 @@ public class LightBulbControlActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        name = extras.getString("pushName");
+        bulbName = extras.getString("pushName");
 
         TextView nameField = (TextView) findViewById(R.id.name);
-        nameField.setText(name);
+        nameField.setText(bulbName);
     }
     private void changeBackgroundColor(int selectedColor) {
         currentBackgroundColor = selectedColor;

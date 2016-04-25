@@ -17,7 +17,7 @@
         android:textSize="17pt"
         android:fontFamily="Helvetica"
         android:layout_centerHorizontal="true"
-        android:text="Reading Lamp"
+        android:text="@string/bulb"
         android:textStyle="bold|italic"
         android:layout_marginTop="15dp"/>
 
@@ -52,7 +52,7 @@
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="On/Off"
+            android:text="@string/onoff"
             android:layout_below="@+id/seekBar"
             android:layout_marginTop="20dp" />
 

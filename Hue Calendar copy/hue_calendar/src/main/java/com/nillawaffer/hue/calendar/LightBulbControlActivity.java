@@ -58,13 +58,7 @@ public class LightBulbControlActivity extends AppCompatActivity {
 
         phHueSDK = PHHueSDK.create();
 
-        Bundle extras = getIntent().getExtras();
-        bulbName = extras.getString("pushName");
-
-        TextView nameField = (TextView) findViewById(R.id.nameLabel);
-        nameField.setText(bulbName);
-
-        //setLabels();
+        setLabels();
 
         //Seek bar code
         seekBar = (SeekBar) findViewById(R.id.seekBar);
@@ -398,10 +392,9 @@ public class LightBulbControlActivity extends AppCompatActivity {
     public void setLabels() {
 
         Bundle extras = getIntent().getExtras();
-
         bulbName = extras.getString("pushName");
 
-        TextView nameField = (TextView) findViewById(R.id.name);
+        TextView nameField = (TextView) findViewById(R.id.nameLabel);
         nameField.setText(bulbName);
     }
     private void changeBackgroundColor(int selectedColor) {

@@ -13,6 +13,11 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
 
 import java.util.Calendar;
 
@@ -70,13 +75,12 @@ public class EventEdit extends AppCompatActivity {
             timeDisplay2.setText(timeEndString);
 
     }
-
+/*
     public void startNewAlarm(){
 
-        private AlarmManager alarmMgr;
+        AlarmManager alarmMgr;
         // Only used for setRepeating() and setInexactRepeating
-        private PendingIntent alarmIntent;
-        ...
+        PendingIntent alarmIntent;
         alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
@@ -97,7 +101,7 @@ public class EventEdit extends AppCompatActivity {
         //        1000 * 60 * 20, alarmIntent);
 
     }
-
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -487,7 +491,7 @@ public class EventEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Event Added", Toast.LENGTH_SHORT).show();
-                startNewAlarm();
+                //startNewAlarm();
                 finish();
             }
         });

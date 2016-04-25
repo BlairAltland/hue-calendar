@@ -290,7 +290,7 @@ public class LightBulbs extends AppCompatActivity {
         imagebutton9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
                 intent.putExtra("pushName", label9.getText());
                 startActivity(intent);
             }
@@ -300,7 +300,7 @@ public class LightBulbs extends AppCompatActivity {
         imagebutton10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
                 intent.putExtra("pushName", label10.getText());
                 startActivity(intent);
             }
@@ -309,7 +309,7 @@ public class LightBulbs extends AppCompatActivity {
         imagebutton11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
                 intent.putExtra("pushName", label11.getText());
                 startActivity(intent);
             }
@@ -318,7 +318,7 @@ public class LightBulbs extends AppCompatActivity {
         imagebutton12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LightBulbs.this, ColorPicker.class);
+                Intent intent = new Intent(LightBulbs.this, LightBulbControlActivity.class);
                 intent.putExtra("pushName", label12.getText());
                 startActivity(intent);
             }

@@ -71,6 +71,33 @@ public class EventEdit extends AppCompatActivity {
 
     }
 
+    public void startNewAlarm(){
+
+        private AlarmManager alarmMgr;
+        // Only used for setRepeating() and setInexactRepeating
+        private PendingIntent alarmIntent;
+        ...
+        alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        // Set the alarm to start at the time of the event
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, startTime);
+        calendar.set(Calendar.MINUTE, startMin);
+
+        // With setInexactRepeating(), this will determine the recurrence. We need to sync this up
+        // with what the user selects (HARDCODED IN AT ONE DAY)
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+        // setRepeating() lets you specify a precise custom interval
+        //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+        //        1000 * 60 * 20, alarmIntent);
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -460,6 +487,7 @@ public class EventEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Event Added", Toast.LENGTH_SHORT).show();
+                startNewAlarm();
                 finish();
             }
         });

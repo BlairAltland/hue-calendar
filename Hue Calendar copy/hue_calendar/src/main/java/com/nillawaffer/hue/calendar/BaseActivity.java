@@ -132,7 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 return true;
 
             case R.id.TagAdditionActivity:
-                intent = new Intent(this,TagAdditionActivity.class);
+                intent = new Intent(this,TagViewActivity.class);
                 startActivity(intent);
                 return true;
         }

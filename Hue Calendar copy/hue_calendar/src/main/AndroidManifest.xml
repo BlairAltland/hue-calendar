@@ -64,6 +64,10 @@
             android:label="@string/tag_activity">
         </activity>
 
+        <activity
+            android:name=".TagViewActivity"
+            android:label="@string/tag_activity">
+        </activity>
 
     </application>
 

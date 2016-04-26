@@ -56,25 +56,24 @@ public class LightBulbs extends AppCompatActivity {
     TextView label11;
     TextView label12;
 
-    //PHBridge bridge = phHueSDK.getSelectedBridge();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light_bulb_view);
         setTitle("Home");
-
+        phHueSDK = PHHueSDK.create();
         instantiateObjects();
 
         //Create the labels
         setLabelsBlank();
-        setLabelText();
+        //setLabelText();
+        setLabelsFromBridge();
 
         setImageButtonContent();
-        //setLabelsFromBridge();
+
         addListenerOnButton();
 
-        phHueSDK = PHHueSDK.create();
 
     }
 

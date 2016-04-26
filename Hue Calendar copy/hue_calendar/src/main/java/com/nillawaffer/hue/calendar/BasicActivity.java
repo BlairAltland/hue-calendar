@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
 
-/**
- * A basic example of how to use week view library.
- * Created by Raquib-ul-Alam Kanak on 1/3/2014.
- * Website: http://alamkanak.github.io
- */
+
+
 public class BasicActivity extends BaseActivity {
 
     @Override
@@ -21,6 +19,68 @@ public class BasicActivity extends BaseActivity {
 
         EventDB dbHelper = new EventDB(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        /*
+        public ArrayList<WeekViewEvent> getEvents() {
+
+            List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+            WeekViewEvent dbEvent = WeekViewEvent.format("SELECT * FROM TABLE_NAME");
+            Cursor cursor = db.getReadableDatabase().rawQuery(dbEvent, null);
+
+
+            if(cursor.moveToFirst())
+                do {
+                    events.add(sessionCursor.getString(1));
+                }
+                while (sessionCursor.moveToNext());
+
+            return events;
+
+        }
+*/
+/*
+        String[] projection = {
+                Events.SubmitEvent.COLUMN_EVENT_NAME,
+                Events.SubmitEvent.COLUMN_EVENT_START_TIME,
+                Events.SubmitEvent.COLUMN_EVENT_END_TIME,
+                Events.SubmitEvent.COLUMN_EVENT_START_DATE,
+                Events.SubmitEvent.COLUMN_EVENT_END_DATE,
+                Events.SubmitEvent.COLUMN_EVENT_TAGS,
+                Events.SubmitEvent.COLUMN_EVENT_REPEAT
+        };
+
+        String[] bind = {
+                Events.SubmitEvent._ID,
+                Events.SubmitEvent.COLUMN_EVENT_NAME,
+                Events.SubmitEvent.COLUMN_EVENT_START_TIME,
+                Events.SubmitEvent.COLUMN_EVENT_END_TIME,
+                Events.SubmitEvent.COLUMN_EVENT_START_DATE,
+                Events.SubmitEvent.COLUMN_EVENT_END_DATE,
+                Events.SubmitEvent.COLUMN_EVENT_TAGS,
+                Events.SubmitEvent.COLUMN_EVENT_REPEAT
+        };
+
+        //now going to call method to return cursor
+
+        Cursor cursor = db.query(Events.SubmitEvent.TABLE_NAME, //table to query
+                bind,
+                null, //columns for where, Null will return all rows
+                null, //values for where
+                null, //Group By, null is no group by
+                null, //Having, null says return all rows
+                null,
+                null,
+                null
+        );
+
+        //the list items from the layout, will find these in the row_item, should have named them better
+        int[] to = new int[]{
+                //pull the 7 different variables into their respective Event Object variables
+                //This may require some more code refactoring, for instance, startTime is broken into
+                //day, hour, minute month and year.
+        };
+
+*/
 
         //TO DO
         //create a global array

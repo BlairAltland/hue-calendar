@@ -43,14 +43,33 @@
         android:paddingLeft="2dp" >
     </ListView>
 
-    <Button
-        android:layout_alignParentBottom="true"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        android:id="@+id/addButton"
+        android:layout_below="@+id/middleRow"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/addButton"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancelButton"
+            android:layout_marginLeft="10dp"/>
+
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

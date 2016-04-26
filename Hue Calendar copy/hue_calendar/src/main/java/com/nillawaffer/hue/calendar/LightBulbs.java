@@ -324,32 +324,6 @@ public class LightBulbs extends AppCompatActivity {
         });
     }
 
-
-    // If you want to handle the response from the bridge, create a PHLightListener object.
-    PHLightListener listener = new PHLightListener() {
-
-        @Override
-        public void onSuccess() {
-        }
-
-        @Override
-        public void onStateUpdate(Map<String, String> arg0, List<PHHueError> arg1) {
-        }
-
-        @Override
-        public void onError(int arg0, String arg1) {}
-
-        @Override
-        public void onReceivingLightDetails(PHLight arg0) {}
-
-        @Override
-        public void onReceivingLights(List<PHBridgeResource> arg0) {}
-
-        @Override
-        public void onSearchComplete() {}
-    };
-
-
     @Override
     protected void onDestroy() {
         PHBridge bridge = phHueSDK.getSelectedBridge();
@@ -514,4 +488,29 @@ public class LightBulbs extends AppCompatActivity {
         label5 = (TextView) findViewById(R.id.label5);
         label5.setText("Family Lamp");
     }
+
+    // If you want to handle the response from the bridge, create a PHLightListener object.
+    PHLightListener listener = new PHLightListener() {
+
+        @Override
+        public void onSuccess() {
+        }
+
+        @Override
+        public void onStateUpdate(Map<String, String> arg0, List<PHHueError> arg1) {
+        }
+
+        @Override
+        public void onError(int arg0, String arg1) {}
+
+        @Override
+        public void onReceivingLightDetails(PHLight arg0) {}
+
+        @Override
+        public void onReceivingLights(List<PHBridgeResource> arg0) {}
+
+        @Override
+        public void onSearchComplete() {}
+    };
+
 }

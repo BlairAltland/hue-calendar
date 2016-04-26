@@ -5,12 +5,27 @@ import com.alamkanak.weekview.WeekViewEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
+
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.Cursor;
 
 
+//TO DO
+//create a global array
+//load array
+//create add method
+//clear array of none-repeating events
+//find repeating events
+//events = repeating events
+
+//NOTES
+//Use setRandomColor() as a means of randomly creating a color
 
 public class BasicActivity extends BaseActivity {
+
+    int randomNumber;
+    Random rand = new Random();
 
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
@@ -82,14 +97,6 @@ public class BasicActivity extends BaseActivity {
 
 */
 
-        //TO DO
-        //create a global array
-        //load array
-        //create add method
-        //clear array of none-repeating events
-            //find repeating events
-            //events = repeating events
-        //determine coloring system
 
         Calendar startTime = Calendar.getInstance();
 
@@ -870,6 +877,40 @@ public class BasicActivity extends BaseActivity {
 
         //Return all events
         return events;
+    }
+
+    public int setRandomColor(){
+
+        int color1 = R.color.event_color_01;
+        int color2 = R.color.event_color_02;
+        int color3 = R.color.event_color_03;
+        int color4 = R.color.event_color_04;
+        int color5 = R.color.event_color_05;
+        int color6 = R.color.event_color_06;
+        int color7 = R.color.event_color_07;
+        int color8 = R.color.event_color_08;
+        int color9 = R.color.event_color_09;
+        int color10 = R.color.event_color_010;
+
+        ArrayList<Integer> colorArray = new ArrayList<Integer>(10);
+
+        randomNumber = rand.nextInt(10 - 0) + 0;
+
+        int returnColor = colorArray.get(randomNumber);
+        //remove this color form the array so it isnt used again for awhile
+        colorArray.remove(randomNumber);
+
+        //once we run out of colors, refill them
+        if (colorArray.size() == 0) {
+
+            colorArray.add(color1, color2);
+            colorArray.add(color3, color4);
+            colorArray.add(color5, color6);
+            colorArray.add(color7, color8);
+            colorArray.add(color9, color10);
+        }
+
+        return returnColor;
     }
 
 }

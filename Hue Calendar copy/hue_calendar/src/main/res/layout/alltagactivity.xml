@@ -20,7 +20,7 @@
     <ListView
         android:id="@+id/BulbListView"
         android:layout_below="@id/label"
-        android:layout_above="@+id/doneButton"
+        android:layout_above="@+id/buttons"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="5dp"
@@ -31,14 +31,30 @@
         android:paddingLeft="2dp" >
     </ListView>
 
-    <Button
-        android:layout_alignParentBottom="true"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/doneButton"
+        android:layout_below="@+id/middleRow"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/buttons">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:id="@+id/doneButton"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add"
+            android:id="@+id/addButton"
+            android:layout_marginLeft="10dp"/>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

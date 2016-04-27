@@ -16,27 +16,27 @@ public class EventDB extends SQLiteOpenHelper{
     private static final String SQL_CREATE_EVENT = "CREATE TABLE " + Events.SubmitEvent.TABLE_NAME + " (" +
             Events.SubmitEvent.COLUMN_EVENT_NAME + TEXT_TYPE + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_START_MIN + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_START_MINUTE + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_START_HOUR + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_START_HOUR + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_END_MIN + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_END_MINUTE + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_END_HOUR + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_END_HOUR + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_START_YEAR + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_START_YEAR + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_START_MONTH + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_START_MONTH + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_START_DAY + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_START_DAY + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_END_YEAR + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_END_YEAR + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_END_MONTH + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_END_MONTH + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_END_DAY + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_END_DAY + "INTEGER" + COMMA_SEP +
 
-            Events.SubmitEvent.COLUMN_EVENT_TAGS + TEXT_TYPE + COMMA_SEP +
+            Events.SubmitEvent.COLUMN_EVENT_TAGS + TEXT_TYPE + COMMA_SEP + ")";
 
 
     // deleting a table

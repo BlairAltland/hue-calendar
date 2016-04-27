@@ -80,6 +80,8 @@ public class EventAddition extends AppCompatActivity {
         setContentView(R.layout.eventaddition);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        addButton = (Button) findViewById(R.id.buttonadd);
+
 
         //add tappablity
         addListenerOnButton();
@@ -469,13 +471,50 @@ public class EventAddition extends AppCompatActivity {
         });
 
         addButton = (Button) findViewById(R.id.buttonadd);
-        /*addButton.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Event Added", Toast.LENGTH_SHORT).show();
-                finish();
+                EventDB myDbHelper = new EventDB(getApplicationContext());
+                SQLiteDatabase db = myDbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+
+
+                values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, startMin);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, startHour);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, endMin);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, endHour);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, startYear);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, startHour);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, startDay);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_YEAR, endYear);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, endMonth);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, endDay);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
+
+                // insert the values into the database
+                long newRowId = db.insert(Events.SubmitEvent.TABLE_NAME, null, values);
+
+                // toast for new data
+                int duration = Toast.LENGTH_LONG;
+                String result;
+
+                // check if data was inserted
+                if (newRowId != -1) {
+                    result = "New Event Added";
+                } else {
+                    result = "Error";
+                }
+
+                Toast toast = Toast.makeText(getApplicationContext(), result, duration);
+                toast.show();
+
+                eventName.setText("");
+                tagName.setText("");
+                eventRepeat.setText("");
+
             }
-        });*/
+        });
     }
 
     @Override
@@ -495,13 +534,15 @@ public class EventAddition extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+/*
     addButton.setOnClickListener(new View.OnClickListener() {
+
         @Override
         public void onClick(View v) {
             EventDB myDbHelper = new EventDB(getApplicationContext());
             SQLiteDatabase db = myDbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
+
 
             values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
             values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, startMin);
@@ -515,7 +556,6 @@ public class EventAddition extends AppCompatActivity {
             values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, endMonth);
             values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, endDay);
             values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
-
 
             // insert the values into the database
             long newRowId = db.insert(Events.SubmitEvent.TABLE_NAME, null, values);
@@ -539,6 +579,6 @@ public class EventAddition extends AppCompatActivity {
             eventRepeat.setText("");
 
         }
-    });
-
+    }
+*/
 }

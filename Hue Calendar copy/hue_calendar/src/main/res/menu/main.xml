@@ -57,13 +57,11 @@
             android:title="@string/light_bulbs"
             android:showAsAction="ifRoom"/>
 
-<<<<<<< HEAD
-=======
         //9
         <item android:id="@+id/TagAdditionActivity"
             android:title="@string/tag_activity"
             android:showAsAction="ifRoom"/>
->>>>>>> parent of 9d4113c... Update
+
 
 
     </group>

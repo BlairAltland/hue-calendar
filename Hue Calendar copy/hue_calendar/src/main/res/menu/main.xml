@@ -56,7 +56,7 @@
         <item android:id="@+id/PHbulbActivity"
             android:title="@string/light_bulbs"
             android:showAsAction="ifRoom"/>
-        
+
 
 
     </group>

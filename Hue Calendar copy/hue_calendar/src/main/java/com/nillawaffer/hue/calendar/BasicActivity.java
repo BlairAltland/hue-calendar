@@ -32,8 +32,8 @@ public class BasicActivity extends BaseActivity {
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-        EventDB dbHelper = new EventDB(getApplicationContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        //EventDB dbHelper = new EventDB(getApplicationContext());
+        //SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         /*
         public ArrayList<WeekViewEvent> getEvents() {

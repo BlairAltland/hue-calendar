@@ -77,7 +77,6 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         menu.getItem(8).setVisible(false);
         menu.getItem(7).setVisible(false);
         menu.getItem(6).setVisible(false);
-        menu.getItem(9).setVisible(false);
 
 
         return true;

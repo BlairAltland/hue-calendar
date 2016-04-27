@@ -1,6 +1,5 @@
 package com.nillawaffer.hue.calendar;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+
 import com.philips.lighting.hue.listener.PHLightListener;
 import com.philips.lighting.hue.sdk.PHHueSDK;
 import com.philips.lighting.model.PHBridge;
@@ -23,7 +23,7 @@ import com.philips.lighting.model.PHBridgeResource;
 import com.philips.lighting.model.PHHueError;
 import com.philips.lighting.model.PHLight;
 
-public class TagAdditionActivity extends ListActivity  {
+public class TagAdditionActivity extends AppCompatActivity {
 
     private PHHueSDK phHueSDK;
     private static final int MAX_HUE=65535;
@@ -42,16 +42,27 @@ public class TagAdditionActivity extends ListActivity  {
         phHueSDK = PHHueSDK.create();
         addListenerOnButton();
 
+
         // Find the ListView resource.
-        //mainListView = (ListView) findViewById(R.id.BulbListView);
-        mainListView = getListView();
+        mainListView = (ListView) findViewById( R.id.BulbListView);
+
+
+
+        // Create and populate a List of planet names.
+        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
+                "Jupiter", "Saturn", "Uranus", "Neptune"};
+
+
+        ArrayList<String> planetList = new ArrayList<String>();
+
+
+        planetList.addAll( Arrays.asList(planets) );
 
         // Create ArrayAdapter using the planet list.
         listAdapter = new ArrayAdapter<String>(this, R.layout.row_item, getBulbNames());
 
         // Set the ArrayAdapter as the ListView's adapter.
         mainListView.setAdapter( listAdapter );
-
     }
 
     public ArrayList getBulbNames() {
@@ -93,11 +104,6 @@ public class TagAdditionActivity extends ListActivity  {
     protected  void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
 
-        Long text = l.getItemIdAtPosition(position);
-        String stringText = text.toString();
-
-        Toast.makeText(getApplicationContext(), stringText,Toast.LENGTH_SHORT).show();
-        /*
         //Handle the on-click and display a toast, will do more work here later
         Cursor cursor = (Cursor) l.getItemAtPosition(position);
 
@@ -106,10 +112,9 @@ public class TagAdditionActivity extends ListActivity  {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(getApplicationContext(), selectedItem, duration);
         toast.show();
-        
-    }
-    */
 
+    }
+*/
     // If you want to handle the response from the bridge, create a PHLightListener object.
     PHLightListener listener = new PHLightListener() {
 

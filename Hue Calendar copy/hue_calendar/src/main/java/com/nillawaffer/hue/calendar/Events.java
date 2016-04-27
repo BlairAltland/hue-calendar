@@ -2,11 +2,6 @@ package com.nillawaffer.hue.calendar;
 
 import android.provider.BaseColumns;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-
 public final class Events{
 
     public Events(){}

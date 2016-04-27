@@ -4,6 +4,7 @@ package com.nillawaffer.hue.calendar;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import com.alamkanak.weekview.WeekViewEvent;
 
 public class EventDB extends SQLiteOpenHelper{
 

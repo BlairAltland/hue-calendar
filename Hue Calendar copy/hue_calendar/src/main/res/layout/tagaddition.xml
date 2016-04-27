@@ -30,7 +30,7 @@
         android:textSize="16dp" />
 
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/BulbListView"
         android:layout_below="@id/label"
         android:layout_above="@+id/addButton"
         android:layout_width="fill_parent"

@@ -23,6 +23,21 @@ import java.util.Calendar;
 public class EventAddition extends AppCompatActivity {
 
 
+    private int startMin;
+    private int startHour;
+
+    private int endMin;
+    private int endHour;
+
+    private int startYear;
+    private int startMonth;
+    private int startDay;
+
+    private int endYear;
+    private int endMonth;
+    private int endDay;
+
+
     private EditText eventName;
     private EditText tagName;
     private EditText eventRepeat;
@@ -118,6 +133,8 @@ public class EventAddition extends AppCompatActivity {
         } else {
             currentHour = pHour;
         }
+        startMin = pMinute;
+        startHour = pHour;
         //Set a message for user
         displayTime.setText(
                 new StringBuilder()
@@ -152,6 +169,9 @@ public class EventAddition extends AppCompatActivity {
             month2 = "December";
         }
 
+        startYear = year;
+        startMonth = month;
+        startDay = day;
         displayDate.setText(
                 new StringBuilder()
                         .append(month2).append(" ")
@@ -203,6 +223,8 @@ public class EventAddition extends AppCompatActivity {
         } else {
             currentHour2 = pHour2;
         }
+        endMin = pMinute2;
+        endHour = pHour2;
         //Set a message for user
         displayTime2.setText(
                 new StringBuilder()
@@ -238,6 +260,9 @@ public class EventAddition extends AppCompatActivity {
         }
 
 
+        endYear = year2;
+        endMonth = month3;
+        endDay = day2;
 
         displayDate2.setText(
                 new StringBuilder()
@@ -414,6 +439,8 @@ public class EventAddition extends AppCompatActivity {
                     year2 = year;
                     month3 = month;
                     day2 = day;
+
+
                     displayDate.setText(
                             new StringBuilder()
                                     .append(month2).append(" ")
@@ -442,13 +469,13 @@ public class EventAddition extends AppCompatActivity {
         });
 
         addButton = (Button) findViewById(R.id.buttonadd);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        /*addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Event Added", Toast.LENGTH_SHORT).show();
                 finish();
             }
-        });
+        });*/
     }
 
     @Override
@@ -477,11 +504,16 @@ public class EventAddition extends AppCompatActivity {
             ContentValues values = new ContentValues();
 
             values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
-            values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, );
-            values.put(Events.Submit)
-            values.put(Events.SubmitEvent.COLUMN_EVENT_END_TIME, displayTime2.getText().toString());
-            values.put(Events.SubmitEvent.COLUMN_EVENT_START_DATE, displayDate.getText().toString());
-            values.put(Events.SubmitEvent.COLUMN_EVENT_END_DATE, displayDate2.getText().toString());
+            values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, startMin);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, startHour);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, endMin);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, endHour);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, startYear);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, startHour);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, startDay);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_END_YEAR, endYear);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, endMonth);
+            values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, endDay);
             values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
 
 

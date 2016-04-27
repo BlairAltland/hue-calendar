@@ -42,7 +42,8 @@ public class EventAddition extends AppCompatActivity {
     private EditText tagName;
     private EditText eventRepeat;
 
-    private TextView displayTime;
+    private TextView firstHourDisplay;
+    private TextView firstMinuteDisplay;
     private Button pickTime;
 
     private int pHour;
@@ -50,7 +51,9 @@ public class EventAddition extends AppCompatActivity {
     /** This integer will uniquely define the dialog to be used for displaying time picker.*/
     static final int TIME_DIALOG_ID = 0;
 
-    private TextView displayDate;
+    private TextView firstMonthDisplay;
+    private TextView firstDayDisplay;
+    private TextView firstYearDisplay;
     private Button pickDate;
 
     private int year2;
@@ -60,10 +63,13 @@ public class EventAddition extends AppCompatActivity {
     static final int DATE_DIALOG_ID = 2;
     static final int DATE_DIALOG_ID2 = 3;
 
-    private TextView displayDate2;
+    private TextView secondMonthDisplay;
+    private TextView secondDayDisplay;
+    private TextView secondYearDisplay;
     private Button pickDate2;
 
-    private TextView displayTime2;
+    private TextView secondHourDisplay;
+    private TextView secondMinuteDisplay;
     private Button pickTime2;
 
     private int pHour2;
@@ -93,10 +99,13 @@ public class EventAddition extends AppCompatActivity {
         eventRepeat = (EditText) findViewById(R.id.repeatField);
 
         /** Capture our View elements */
-        displayTime = (TextView) findViewById(R.id.timeDisplay);
+        firstHourDisplay = (TextView) findViewById(R.id.firstHourDisplay);
+        firstMinuteDisplay = (TextView) findViewById(R.id.firstMinuteDisplay);
         pickTime = (Button) findViewById(R.id.pickTime);
 
-        displayDate = (TextView) findViewById(R.id.dateDisplay);
+        firstMonthDisplay = (TextView) findViewById(R.id.firstMonthDisplay);
+        firstDayDisplay = (TextView) findViewById(R.id.firstDayDisplay);
+        firstYearDisplay = (TextView) findViewByID(R.id.firstYearDisplay);
         pickDate = (Button) findViewById(R.id.pickDate);
 
         /** Listener for click event of the button */
@@ -138,10 +147,13 @@ public class EventAddition extends AppCompatActivity {
         startMin = pMinute;
         startHour = pHour;
         //Set a message for user
-        displayTime.setText(
+        firstHourDisplay.setText(
                 new StringBuilder()
-                        .append(pad(currentHour)).append(":")
+                        .append(pad(currentHour)).append(":"));
+        firstMinuteDisplay.setText(
+                new StringBuilder()
                         .append(pad(pMinute)).append(" ").append(aMpM));
+
 
         /** Display the current time in the TextView */
         String month2 = " ";
@@ -174,17 +186,26 @@ public class EventAddition extends AppCompatActivity {
         startYear = year;
         startMonth = month;
         startDay = day;
-        displayDate.setText(
+
+        firstMonthDisplay.setText(
                 new StringBuilder()
-                        .append(month2).append(" ")
-                        .append(day).append(", ").append(year));
+                        .append(month2).append(" "));
+        firstDayDisplay.setText(
+                new StringBuilder()
+                        .append(day).append(", "));
+        firstYearDisplay.setText(
+                new StringBuilder()
+                        .append(year));
 
         /** Capture our View elements */
-        displayTime2 = (TextView) findViewById(R.id.timeDisplay2);
+        secondHourDisplay = (TextView) findViewById(R.id.secondHourDisplay);
+        secondMinuteDisplay = (TextView) findViewById(R.id.secondMinuteDisplay);
         pickTime2 = (Button) findViewById(R.id.pickTime2);
 
         /** Capture our View elements */
-        displayDate2 = (TextView) findViewById(R.id.dateDisplay2);
+        secondMonthDisplay = (TextView) findViewById(R.id.secondMonthDisplay);
+        secondDayDisplay = (TextView) findViewById(R.id.secondDayDisplay);
+        secondYearDisplay = (TextView) findViewById(R.id.secondYearDisplay);
         pickDate2 = (Button) findViewById(R.id.pickDate2);
 
         /** Listener for click event of the button */
@@ -228,9 +249,11 @@ public class EventAddition extends AppCompatActivity {
         endMin = pMinute2;
         endHour = pHour2;
         //Set a message for user
-        displayTime2.setText(
+        secondHourDisplay.setText(
                 new StringBuilder()
-                        .append(pad(currentHour2)).append(":")
+                        .append(pad(currentHour2)).append(":"));
+        secondMinuteDisplay.setText(
+                new StringBuilder()
                         .append(pad(pMinute2)).append(" ").append(aMpM2));
 
         /** Display the current date in the TextView */
@@ -266,10 +289,15 @@ public class EventAddition extends AppCompatActivity {
         endMonth = month3;
         endDay = day2;
 
-        displayDate2.setText(
+        secondMonthDisplay.setText(
                 new StringBuilder()
                         .append(monthh2).append(" ")
-                        .append(day2).append(", ").append(year2));
+        secondDayDisplay.setText(
+                new StringBuilder()
+                        .append(day2).append(", "));
+        secondYearDisplay.setText(
+                new StringBuilder()
+                        .append(year2));
 
     }
 
@@ -292,9 +320,12 @@ public class EventAddition extends AppCompatActivity {
                     //Set a message for user
                     pHour = hourOfDay;
                     pMinute = minute;
-                    displayTime.setText(
+                    firstHourDisplay.setText(
                             new StringBuilder()
                                     .append(pad(currentHour)).append(":")
+                                    .append(pad(pMinute)).append(" ").append(aMpM));
+                    firstMinuteDisplay.setText(
+                            new StringBuilder()
                                     .append(pad(pMinute)).append(" ").append(aMpM));
                 }
             };
@@ -335,11 +366,17 @@ public class EventAddition extends AppCompatActivity {
                     year2 = year;
                     month3 = month;
                     day2 = day;
-                    displayDate2.setText(
+
+                    secondMonthDisplay.setText(
                             new StringBuilder()
                                     .append(month2).append(" ")
-                                    .append(day).append(", ").append(year));
-
+                    secondDayDisplay.setText(
+                            new StringBuilder()
+                                    .append(day).append(", "));
+                    secondYearDisplay.setText(
+                            new StringBuilder()
+                                    .append(year));
+                    )
 
                 }
             };
@@ -398,9 +435,12 @@ public class EventAddition extends AppCompatActivity {
                     //Set a message for user
                     pHour2 = hourOfDay;
                     pMinute2 = minute;
-                    displayTime2.setText(
+
+                    secondHourDisplay.setText(
                             new StringBuilder()
                                     .append(pad(currentHour)).append(":")
+                    secondMinuteDisplay.setText(
+                            new StringBuilder()
                                     .append(pad(pMinute2)).append(" ").append(aMpM));
                 }
             };
@@ -442,12 +482,16 @@ public class EventAddition extends AppCompatActivity {
                     month3 = month;
                     day2 = day;
 
-
-                    displayDate.setText(
+                    firstMonthDisplay.setText(
                             new StringBuilder()
                                     .append(month2).append(" ")
                                     .append(day).append(", ").append(year));
-
+                    firstDayDisplay.setText(
+                            new StringBuilder()
+                                    .append(day).append(", "));
+                    firstYearDisplay.setText(
+                            new StringBuilder()
+                                    .append(year));
 
                 }
             };

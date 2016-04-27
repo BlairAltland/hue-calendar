@@ -18,13 +18,40 @@
         android:textStyle="bold"
         android:textSize="20dp" />
 
-    <TextView android:id="@+id/timeDisplay"
+    <!--<TextView android:id="@+id/timeDisplay"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/textfieldone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="11dp"/>-->
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+    <TextView android:id="@+id/firstHourDisplay"
         android:paddingTop="10dp"
         android:layout_below="@+id/textfieldone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:layout_marginStart="11dp"/>
+
+    <TextView android:id="@+id/firstMinuteDisplay"
+        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="11dp"/>
+
+    </LinearLayout>
+
 
     <Button android:id="@+id/pickTime"
         android:layout_below="@+id/timeDisplay"
@@ -44,12 +71,30 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="2dp"/>
 
-    <TextView android:id="@+id/timeDisplay2"
-        android:layout_below="@+id/line1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginStart="11dp"/>
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView android:id="@+id/secondHourDisplay"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/textfieldone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+        <TextView android:id="@+id/secondMinuteDisplay"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+    </LinearLayout>
 
     <Button android:id="@+id/pickTime2"
         android:layout_below="@+id/timeDisplay2"
@@ -69,13 +114,37 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="2dp"/>
 
-    <TextView android:id="@+id/dateDisplay"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line2"
-        android:text="@string/askDate"
-        android:textSize="18sp"
-        android:layout_marginStart="11dp"/>
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView android:id="@+id/firstMonthDisplay"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/textfieldone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+        <TextView android:id="@+id/firstDayDisplay"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+        <TextView android:id="@+id/firstYearDisplay"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_below="@+id/dateDisplay"
@@ -96,13 +165,37 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="2dp"/>
 
-    <TextView android:id="@+id/dateDisplay2"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line4"
-        android:text="@string/askDate2"
-        android:textSize="18sp"
-        android:layout_marginStart="11dp"/>
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView android:id="@+id/secondMonthDisplay"
+            android:paddingTop="10dp"
+            android:layout_below="@+id/textfieldone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+        <TextView android:id="@+id/secondDayDisplay"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+        <TextView android:id="@+id/secondYearDisplay"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="11dp"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_below="@+id/dateDisplay2"

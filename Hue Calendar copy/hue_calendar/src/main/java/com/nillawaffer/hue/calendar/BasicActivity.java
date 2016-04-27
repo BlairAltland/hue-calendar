@@ -98,6 +98,8 @@ public class BasicActivity extends BaseActivity {
 */
 
 
+        //Time needs to be cut into Hour and Minute
+        //Date needs to be cut into Day, Month Year
         Calendar startTime = Calendar.getInstance();
 
         //Set Start Time

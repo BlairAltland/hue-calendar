@@ -77,6 +77,8 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         menu.getItem(8).setVisible(false);
         menu.getItem(7).setVisible(false);
         menu.getItem(6).setVisible(false);
+        menu.getItem(9).setVisible(false);
+
 
         return true;
     }
@@ -128,11 +130,6 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
             case R.id.PHbulbActivity:
                 Intent intent = new Intent(this, PHBulbActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.TagAdditionActivity:
-                intent = new Intent(this,TagViewActivity.class);
                 startActivity(intent);
                 return true;
         }

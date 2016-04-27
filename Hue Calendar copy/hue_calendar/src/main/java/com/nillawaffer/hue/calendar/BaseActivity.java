@@ -131,10 +131,6 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 startActivity(intent);
                 return true;
 
-            case R.id.TagAdditionActivity:
-                intent = new Intent(this,TagViewActivity.class);
-                startActivity(intent);
-                return true;
         }
 
         return super.onOptionsItemSelected(item);

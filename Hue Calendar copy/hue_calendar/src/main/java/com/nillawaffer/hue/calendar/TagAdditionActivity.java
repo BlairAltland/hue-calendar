@@ -42,21 +42,8 @@ public class TagAdditionActivity extends AppCompatActivity {
         phHueSDK = PHHueSDK.create();
         addListenerOnButton();
 
-
         // Find the ListView resource.
         mainListView = (ListView) findViewById( R.id.BulbListView);
-
-
-
-        // Create and populate a List of planet names.
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-
-
-        ArrayList<String> planetList = new ArrayList<String>();
-
-
-        planetList.addAll( Arrays.asList(planets) );
 
         // Create ArrayAdapter using the planet list.
         listAdapter = new ArrayAdapter<String>(this, R.layout.row_item, getBulbNames());

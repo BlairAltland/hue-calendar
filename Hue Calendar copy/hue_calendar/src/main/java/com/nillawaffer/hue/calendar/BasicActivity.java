@@ -121,8 +121,10 @@ public class BasicActivity extends BaseActivity {
 
         //monday
 
+        int month = 4;
+
         startTime = Calendar.getInstance();
-        startTime.set(Calendar.DAY_OF_MONTH, 4);
+        startTime.set(Calendar.DAY_OF_MONTH, month);
         startTime.set(Calendar.HOUR_OF_DAY, 9);
         startTime.set(Calendar.MINUTE, 0);
         startTime.set(Calendar.MONTH, newMonth-1);

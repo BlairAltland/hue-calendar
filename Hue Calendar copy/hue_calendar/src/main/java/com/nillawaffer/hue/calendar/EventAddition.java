@@ -96,7 +96,6 @@ public class EventAddition extends AppCompatActivity {
 
         eventName = (EditText) findViewById(R.id.textfieldone);
         tagName = (EditText) findViewById(R.id.tagField);
-        eventRepeat = (EditText) findViewById(R.id.repeatField);
 
         /** Capture our View elements */
         firstHourDisplay = (TextView) findViewById(R.id.firstHourDisplay);

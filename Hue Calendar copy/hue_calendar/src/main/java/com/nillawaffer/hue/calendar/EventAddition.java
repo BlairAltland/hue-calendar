@@ -237,6 +237,8 @@ public class EventAddition extends AppCompatActivity {
             monthh2 = "December";
         }
 
+
+
         displayDate2.setText(
                 new StringBuilder()
                         .append(monthh2).append(" ")
@@ -250,12 +252,12 @@ public class EventAddition extends AppCompatActivity {
                 ContentValues values = new ContentValues();
 
                 values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_TIME, displayTime.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, );
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_TIME, displayTime2.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_DATE, displayDate.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_DATE, displayDate2.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_REPEAT, eventRepeat.getText().toString());
+
 
                 // insert the values into the database
                 long newRowId = db.insert(Events.SubmitEvent.TABLE_NAME, null, values);

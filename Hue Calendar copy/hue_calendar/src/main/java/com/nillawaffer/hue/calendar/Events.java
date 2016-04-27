@@ -15,12 +15,17 @@ public final class Events{
 
         public static final String TABLE_NAME="Events";
         public static final String COLUMN_EVENT_NAME="eventName";
-        public static final String COLUMN_EVENT_START_TIME="timeDisplay";
-        public static final String COLUMN_EVENT_END_TIME="timeDisplay2";
-        public static final String COLUMN_EVENT_START_DATE="dateDisplay";
-        public static final String COLUMN_EVENT_END_DATE="dateDisplay2";
+        public static final int COLUMN_EVENT_START_MINUTE="timeDisplay";
+        public static final int COLUMN_EVENT_START_HOUR="timeDisplay";
+        public static final int COLUMN_EVENT_END_MINUTE="timeDisplay2";
+        public static final int COLUMN_EVENT_END_HOUR="timeDisplay2";
+        public static final int COLUMN_EVENT_START_YEAR="dateDisplay";
+        public static final int COLUMN_EVENT_START_MONTH="dateDisplay";
+        public static final int COLUMN_EVENT_START_DAY="dateDisplay";
+        public static final int COLUMN_EVENT_END_YEAR="dateDisplay2";
+        public static final int COLUMN_EVENT_END_MONTH="dateDisplay2";
+        public static final int COLUMN_EVENT_END_DAY="dateDisplay2";
         public static final String COLUMN_EVENT_TAGS="eventTags";
-        public static final String COLUMN_EVENT_REPEAT="eventRepeat";
 
     }
 

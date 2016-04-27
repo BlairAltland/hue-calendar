@@ -23,7 +23,7 @@ import java.util.Calendar;
 public class EventAddition extends AppCompatActivity {
 
 
-    private int startMin;
+    public int startMin;
     private int startHour;
 
     private int endMin;
@@ -480,16 +480,16 @@ public class EventAddition extends AppCompatActivity {
 
 
                 values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, startMin);
+                //values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, startMin);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, startHour);
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, endMin);
+                //values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, endMin);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, endHour);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, startYear);
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, startHour);
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, startDay);
+                //values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, startHour);
+                //values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, startDay);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_YEAR, endYear);
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, endMonth);
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, endDay);
+                //values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, endMonth);
+                //values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, endDay);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
 
                 // insert the values into the database

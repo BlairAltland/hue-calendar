@@ -132,14 +132,6 @@
         android:layout_marginStart="11dp"
         />
 
-    <EditText android:id="@+id/repeatField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tagField"
-        android:hint="Repeat"
-        android:text="@string/repeatField"
-        android:layout_marginStart="11dp"
-        />
 
     <LinearLayout
         android:layout_width="wrap_content"

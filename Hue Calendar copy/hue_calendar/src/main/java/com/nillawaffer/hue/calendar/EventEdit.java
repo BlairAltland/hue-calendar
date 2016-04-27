@@ -70,7 +70,7 @@ public class EventEdit extends AppCompatActivity {
             String time = startTime + ":" + startMin;
             timeDisplay.setText(time);
 
-            TextView timeDisplay2 = (TextView) findViewById(R.id.timeDisplay2);
+            TextView timeDisplay2 = (TextView) findViewById(R.id.secondMonthDisplay);
             String timeEndString  = endTime + ":" + endMin;
             timeDisplay2.setText(timeEndString);
 
@@ -116,7 +116,7 @@ public class EventEdit extends AppCompatActivity {
         displayTime = (TextView) findViewById(R.id.timeDisplay);
         pickTime = (Button) findViewById(R.id.pickTime);
 
-        displayDate = (TextView) findViewById(R.id.dateDisplay);
+        displayDate = (TextView) findViewById(R.id.firstYearDisplay);
         pickDate = (Button) findViewById(R.id.pickDate);
 
         /** Listener for click event of the button */
@@ -195,11 +195,11 @@ public class EventEdit extends AppCompatActivity {
                         .append(day).append(", ").append(year));
 
         /** Capture our View elements */
-        displayTime2 = (TextView) findViewById(R.id.timeDisplay2);
+        displayTime2 = (TextView) findViewById(R.id.secondHourDisplay);
         pickTime2 = (Button) findViewById(R.id.pickTime2);
 
         /** Capture our View elements */
-        displayDate2 = (TextView) findViewById(R.id.dateDisplay2);
+        displayDate2 = (TextView) findViewById(R.id.secondYearDisplay);
         pickDate2 = (Button) findViewById(R.id.pickDate2);
 
         /** Listener for click event of the button */

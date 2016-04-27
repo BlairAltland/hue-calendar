@@ -104,7 +104,7 @@ public class EventAddition extends AppCompatActivity {
 
         firstMonthDisplay = (TextView) findViewById(R.id.firstMonthDisplay);
         firstDayDisplay = (TextView) findViewById(R.id.firstDayDisplay);
-        firstYearDisplay = (TextView) findViewByID(R.id.firstYearDisplay);
+        firstYearDisplay = (TextView) findViewById(R.id.firstYearDisplay);
         pickDate = (Button) findViewById(R.id.pickDate);
 
         /** Listener for click event of the button */
@@ -148,10 +148,10 @@ public class EventAddition extends AppCompatActivity {
         //Set a message for user
         firstHourDisplay.setText(
                 new StringBuilder()
-                        .append(pad(currentHour)).append(":"));
+                        .append(pad(currentHour)));
         firstMinuteDisplay.setText(
                 new StringBuilder()
-                        .append(pad(pMinute)).append(" ").append(aMpM));
+                        .append(pad(pMinute)));
 
 
         /** Display the current time in the TextView */
@@ -188,10 +188,10 @@ public class EventAddition extends AppCompatActivity {
 
         firstMonthDisplay.setText(
                 new StringBuilder()
-                        .append(month2).append(" "));
+                        .append(month2));
         firstDayDisplay.setText(
                 new StringBuilder()
-                        .append(day).append(", "));
+                        .append(day));
         firstYearDisplay.setText(
                 new StringBuilder()
                         .append(year));
@@ -250,10 +250,10 @@ public class EventAddition extends AppCompatActivity {
         //Set a message for user
         secondHourDisplay.setText(
                 new StringBuilder()
-                        .append(pad(currentHour2)).append(":"));
+                        .append(pad(currentHour2)));
         secondMinuteDisplay.setText(
                 new StringBuilder()
-                        .append(pad(pMinute2)).append(" ").append(aMpM2));
+                        .append(pad(pMinute2)));
 
         /** Display the current date in the TextView */
         String monthh2 = " ";
@@ -290,10 +290,10 @@ public class EventAddition extends AppCompatActivity {
 
         secondMonthDisplay.setText(
                 new StringBuilder()
-                        .append(monthh2).append(" ")
+                        .append(monthh2));
         secondDayDisplay.setText(
                 new StringBuilder()
-                        .append(day2).append(", "));
+                        .append(day2));
         secondYearDisplay.setText(
                 new StringBuilder()
                         .append(year2));
@@ -321,11 +321,10 @@ public class EventAddition extends AppCompatActivity {
                     pMinute = minute;
                     firstHourDisplay.setText(
                             new StringBuilder()
-                                    .append(pad(currentHour)).append(":")
-                                    .append(pad(pMinute)).append(" ").append(aMpM));
+                                    .append(pad(currentHour)));
                     firstMinuteDisplay.setText(
                             new StringBuilder()
-                                    .append(pad(pMinute)).append(" ").append(aMpM));
+                                    .append(pad(pMinute)));
                 }
             };
 
@@ -368,14 +367,13 @@ public class EventAddition extends AppCompatActivity {
 
                     secondMonthDisplay.setText(
                             new StringBuilder()
-                                    .append(month2).append(" ")
+                                    .append(month2));
                     secondDayDisplay.setText(
                             new StringBuilder()
-                                    .append(day).append(", "));
+                                    .append(day));
                     secondYearDisplay.setText(
                             new StringBuilder()
                                     .append(year));
-                    )
 
                 }
             };
@@ -437,10 +435,10 @@ public class EventAddition extends AppCompatActivity {
 
                     secondHourDisplay.setText(
                             new StringBuilder()
-                                    .append(pad(currentHour)).append(":")
+                                    .append(pad(currentHour)));
                     secondMinuteDisplay.setText(
                             new StringBuilder()
-                                    .append(pad(pMinute2)).append(" ").append(aMpM));
+                                    .append(pad(pMinute2)));
                 }
             };
 
@@ -483,11 +481,10 @@ public class EventAddition extends AppCompatActivity {
 
                     firstMonthDisplay.setText(
                             new StringBuilder()
-                                    .append(month2).append(" ")
-                                    .append(day).append(", ").append(year));
+                                    .append(month2));
                     firstDayDisplay.setText(
                             new StringBuilder()
-                                    .append(day).append(", "));
+                                    .append(day));
                     firstYearDisplay.setText(
                             new StringBuilder()
                                     .append(year));
@@ -523,16 +520,16 @@ public class EventAddition extends AppCompatActivity {
 
 
                 values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
-                //values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, startMin);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, startMin);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, startHour);
-                //values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, endMin);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, endMin);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, endHour);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, startYear);
-                //values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, startHour);
-                //values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, startDay);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, startHour);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, startDay);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_YEAR, endYear);
-                //values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, endMonth);
-                //values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, endDay);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, endMonth);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, endDay);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
 
                 // insert the values into the database

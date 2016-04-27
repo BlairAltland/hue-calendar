@@ -78,7 +78,7 @@ public class DatePickerActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         /** Capture our View elements */
-        displayDate = (TextView) findViewById(R.id.dateDisplay);
+        displayDate = (TextView) findViewById(R.id.firstMonthDisplay);
         pickDate = (Button) findViewById(R.id.pickDate);
 
         /** Listener for click event of the button */

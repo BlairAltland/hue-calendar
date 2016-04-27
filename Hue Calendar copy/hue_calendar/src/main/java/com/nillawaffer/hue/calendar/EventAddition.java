@@ -244,44 +244,6 @@ public class EventAddition extends AppCompatActivity {
                         .append(monthh2).append(" ")
                         .append(day2).append(", ").append(year2));
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventDB myDbHelper = new EventDB(getApplicationContext());
-                SQLiteDatabase db = myDbHelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
-
-                values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, );
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_TIME, displayTime2.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_DATE, displayDate.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_DATE, displayDate2.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
-
-
-                // insert the values into the database
-                long newRowId = db.insert(Events.SubmitEvent.TABLE_NAME, null, values);
-
-                // toast for new data
-                int duration = Toast.LENGTH_LONG;
-                String result;
-
-                // check if data was inserted
-                if (newRowId != -1) {
-                    result = "New Event Added";
-                } else {
-                    result = "Error";
-                }
-
-                Toast toast = Toast.makeText(getApplicationContext(), result, duration);
-                toast.show();
-
-                eventName.setText("");
-                tagName.setText("");
-                eventRepeat.setText("");
-
-            }
-        });
     }
 
     /** Callback received when the user "picks" a time in the dialog */
@@ -505,5 +467,46 @@ public class EventAddition extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    addButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            EventDB myDbHelper = new EventDB(getApplicationContext());
+            SQLiteDatabase db = myDbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
+            values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, );
+            values.put(Events.Submit)
+            values.put(Events.SubmitEvent.COLUMN_EVENT_END_TIME, displayTime2.getText().toString());
+            values.put(Events.SubmitEvent.COLUMN_EVENT_START_DATE, displayDate.getText().toString());
+            values.put(Events.SubmitEvent.COLUMN_EVENT_END_DATE, displayDate2.getText().toString());
+            values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
+
+
+            // insert the values into the database
+            long newRowId = db.insert(Events.SubmitEvent.TABLE_NAME, null, values);
+
+            // toast for new data
+            int duration = Toast.LENGTH_LONG;
+            String result;
+
+            // check if data was inserted
+            if (newRowId != -1) {
+                result = "New Event Added";
+            } else {
+                result = "Error";
+            }
+
+            Toast toast = Toast.makeText(getApplicationContext(), result, duration);
+            toast.show();
+
+            eventName.setText("");
+            tagName.setText("");
+            eventRepeat.setText("");
+
+        }
+    });
 
 }

@@ -32,8 +32,8 @@ public class BasicActivity extends BaseActivity {
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-        //EventDB dbHelper = new EventDB(getApplicationContext());
-        //SQLiteDatabase db = dbHelper.getReadableDatabase();
+        EventDB dbHelper = new EventDB(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         /*
         public ArrayList<WeekViewEvent> getEvents() {
@@ -53,26 +53,36 @@ public class BasicActivity extends BaseActivity {
 
         }
 */
-/*
+        /*
         String[] projection = {
-                Events.SubmitEvent.COLUMN_EVENT_NAME,
-                Events.SubmitEvent.COLUMN_EVENT_START_TIME,
-                Events.SubmitEvent.COLUMN_EVENT_END_TIME,
-                Events.SubmitEvent.COLUMN_EVENT_START_DATE,
-                Events.SubmitEvent.COLUMN_EVENT_END_DATE,
-                Events.SubmitEvent.COLUMN_EVENT_TAGS,
-                Events.SubmitEvent.COLUMN_EVENT_REPEAT
+        Events.SubmitEvent.COLUMN_EVENT_NAME,
+        Events.SubmitEvent.COLUMN_EVENT_START_MINUTE,
+        Events.SubmitEvent.COLUMN_EVENT_START_HOUR,
+        Events.SubmitEvent.COLUMN_EVENT_END_MINUTE,
+        Events.SubmitEvent.COLUMN_EVENT_END_HOUR",
+        Events.SubmitEvent.COLUMN_EVENT_START_YEAR,
+        Events.SubmitEvent.COLUMN_EVENT_START_MONTH,
+        Events.SubmitEvent.COLUMN_EVENT_START_DAY,
+        Events.SubmitEvent.COLUMN_EVENT_END_YEAR,
+        Events.SubmitEvent.COLUMN_EVENT_END_MONTH,
+        Events.SubmitEvent.COLUMN_EVENT_END_DAY,
+        Events.SubmitEvent.COLUMN_EVENT_TAGS
         };
 
         String[] bind = {
-                Events.SubmitEvent._ID,
-                Events.SubmitEvent.COLUMN_EVENT_NAME,
-                Events.SubmitEvent.COLUMN_EVENT_START_TIME,
-                Events.SubmitEvent.COLUMN_EVENT_END_TIME,
-                Events.SubmitEvent.COLUMN_EVENT_START_DATE,
-                Events.SubmitEvent.COLUMN_EVENT_END_DATE,
-                Events.SubmitEvent.COLUMN_EVENT_TAGS,
-                Events.SubmitEvent.COLUMN_EVENT_REPEAT
+        Events.SubmitEvent._ID,
+        Events.SubmitEvent.COLUMN_EVENT_NAME,
+        Events.SubmitEvent.COLUMN_EVENT_START_MINUTE,
+        Events.SubmitEvent.COLUMN_EVENT_START_HOUR,
+        Events.SubmitEvent.COLUMN_EVENT_END_MINUTE,
+        Events.SubmitEvent.COLUMN_EVENT_END_HOUR",
+        Events.SubmitEvent.COLUMN_EVENT_START_YEAR,
+        Events.SubmitEvent.COLUMN_EVENT_START_MONTH,
+        Events.SubmitEvent.COLUMN_EVENT_START_DAY,
+        Events.SubmitEvent.COLUMN_EVENT_END_YEAR,
+        Events.SubmitEvent.COLUMN_EVENT_END_MONTH,
+        Events.SubmitEvent.COLUMN_EVENT_END_DAY,
+        Events.SubmitEvent.COLUMN_EVENT_TAGS
         };
 
         //now going to call method to return cursor
@@ -85,17 +95,28 @@ public class BasicActivity extends BaseActivity {
                 null, //Having, null says return all rows
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null
         );
 
         //the list items from the layout, will find these in the row_item, should have named them better
         int[] to = new int[]{
-                //pull the 7 different variables into their respective Event Object variables
-                //This may require some more code refactoring, for instance, startTime is broken into
-                //day, hour, minute month and year.
+                Log.e("I shouldn't be here");
         };
-
 */
+
+
+/*
+        while (cursor.moveToNext()) {
+            // Extract data.
+        }
+*/
+
+
 
 
         Calendar startTime = Calendar.getInstance();

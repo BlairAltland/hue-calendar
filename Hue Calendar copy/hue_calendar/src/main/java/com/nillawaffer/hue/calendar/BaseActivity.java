@@ -16,9 +16,13 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     private static final int TYPE_DAY_VIEW = 1;
@@ -31,6 +35,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     String tag = "0";
     String startTime = "0";
     String endTime = "0";
+
+    private static final int MAX_HUE=65535;
+    public static final String TAG = "Hue Calendar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BaseActivity.this, EventAddition.class);
+                Intent intent = new Intent(BaseActivity.this, PHHomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -224,4 +231,5 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     public WeekView getWeekView() {
         return mWeekView;
     }
+
 }

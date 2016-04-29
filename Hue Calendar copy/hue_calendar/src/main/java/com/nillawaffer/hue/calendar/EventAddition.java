@@ -3,8 +3,12 @@ package com.nillawaffer.hue.calendar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,25 +18,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import android.content.Context;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import android.os.Handler;
 
 import com.philips.lighting.hue.listener.PHGroupListener;
 import com.philips.lighting.hue.listener.PHLightListener;
 import com.philips.lighting.hue.listener.PHScheduleListener;
 import com.philips.lighting.hue.sdk.PHHueSDK;
-import com.philips.lighting.hue.sdk.clip.PHScheduleSerializer;
 import com.philips.lighting.model.PHBridge;
 import com.philips.lighting.model.PHBridgeResource;
+import com.philips.lighting.model.PHBridgeResourcesCache;
 import com.philips.lighting.model.PHGroup;
 import com.philips.lighting.model.PHHueError;
 import com.philips.lighting.model.PHLight;
@@ -47,14 +49,11 @@ public class EventAddition extends AppCompatActivity {
 
     public int startMin;
     private int startHour;
-
     private int endMin;
     private int endHour;
-
     private int startYear;
     private int startMonth;
     private int startDay;
-
     private int endYear;
     private int endMonth;
     private int endDay;
@@ -63,7 +62,6 @@ public class EventAddition extends AppCompatActivity {
     private EditText eventName;
     private EditText tagName;
     private EditText eventRepeat;
-
     private TextView firstHourDisplay;
     private TextView firstMinuteDisplay;
     private Button pickTime;
@@ -102,6 +100,11 @@ public class EventAddition extends AppCompatActivity {
     Button addButton;
     Button cancelButton;
 
+    StringBuilder Builder = new StringBuilder();
+
+    private Handler mUserLocationHandler = null;
+    private Handler handler = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,22 +115,43 @@ public class EventAddition extends AppCompatActivity {
 
         phHueSDK = PHHueSDK.create();
 
-        createGroup();
+        //createGroup();
 
-        PHBridge selectedBridge = PHHueSDK.getInstance().getSelectedBridge();
-        List<PHGroup> groups = selectedBridge.getResourceCache().getAllGroups();
+        scheduleLights();
+
+        /*
+        PHBridgeResourcesCache cache = phHueSDK.getSelectedBridge().getResourceCache();
+        List<PHSchedule> mySchedules = cache.getAllSchedules(true);
         StringBuilder sb = new StringBuilder();
-        for (PHGroup group : groups){
 
-            sb.append(group.getName());
+        for (PHSchedule schedule : mySchedules){
+
+            sb.append(schedule.getName());
             sb.append(", ");
         }
 
-        int duration = Toast.LENGTH_LONG;
+        int duration = Toast.LENGTH_SHORT;
         String result = sb.toString();
 
         Toast toast = Toast.makeText(getApplicationContext(), result, duration);
         toast.show();
+        */
+        /*
+        PHBridge selectedBridge = PHHueSDK.getInstance().getSelectedBridge();
+        List<PHSchedule> groups = selectedBridge.getResourceCache().getAllSchedules(true);
+        StringBuilder sb = new StringBuilder();
+        for (PHSchedule schedule : groups){
+
+            sb.append(schedule.getName());
+            sb.append(", ");
+        }
+
+        int duration = Toast.LENGTH_SHORT;
+        String result = sb.toString();
+
+        Toast toast = Toast.makeText(getApplicationContext(), result, duration);
+        toast.show();
+        */
 
         //add tappablity
         addListenerOnButton();
@@ -547,7 +571,9 @@ public class EventAddition extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(EventAddition.this, BasicActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -589,10 +615,12 @@ public class EventAddition extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(getApplicationContext(), result, duration);
                 toast.show();
-                scheduleLights();
 
                 eventName.setText("");
                 tagName.setText("");
+
+                Intent intent = new Intent(EventAddition.this, BasicActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -601,46 +629,104 @@ public class EventAddition extends AppCompatActivity {
 
     public void scheduleLights(){
 
+
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
-        calendar.set(Calendar.MONTH, startMonth);
+        calendar.set(Calendar.MONTH, 04);
         calendar.set(Calendar.YEAR, 2016);
-        calendar.set(Calendar.HOUR, startHour);
-        calendar.set(Calendar.MINUTE, startMin);
+        calendar.set(Calendar.HOUR, 21);
+        calendar.set(Calendar.MINUTE, 01);
         Date date = calendar.getTime();
+        /*
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.clear();
+        calendar2.set(Calendar.HOUR, 21);
+        calendar2.set(Calendar.MINUTE, 1);
+        Date time = calendar2.getTime();
 
-        PHBridge selectedBridge = PHHueSDK.getInstance().getSelectedBridge();
-        PHSchedule schedule = new PHSchedule("test");
+        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+
+        PHSchedule schedule = new PHSchedule("My Alarm");
+
         PHLightState lightState = new PHLightState();
         lightState.setOn(false);
+
         schedule.setLightState(lightState);
-        schedule.setGroupIdentifier("All");
-        schedule.setDate(date);
+        schedule.setLightIdentifier("1");
+        //schedule.setGroupIdentifier("All");
         schedule.setAutoDelete(true);
-        selectedBridge.updateSchedule(schedule, PHListener);
+        schedule.setDate(date);
+        schedule.setStartTime(time);
+        bridge.createSchedule(schedule, PHListener);
+        */
+
+        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+
+        PHSchedule schedule = new PHSchedule("My Alarm");
+
+        PHLightState lightState = new PHLightState();
+        lightState.setOn(false);
+
+        schedule.setLightState(lightState);
+        schedule.setLightIdentifier("2");
+        schedule.setDate(date);  // Create your date object here with your desired start time
+        bridge.createSchedule(schedule, new PHScheduleListener() {
+
+            @Override
+            public void onCreated(PHSchedule phSchedule) {
+
+                Toast.makeText(EventAddition.this, "Created", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onSuccess() {
+
+                Toast.makeText(EventAddition.this, "Success", Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+
+            }
+
+            @Override
+            public void onStateUpdate(Map<String, String> map, List<PHHueError> list) {
+
+            }
+        });
 
     }
 
     public void createGroup() {
-        List<String> lightNames = new ArrayList<String>();
 
-        PHBridge selectedBridge = PHHueSDK.getInstance().getSelectedBridge();
-        List<PHLight> allLights = selectedBridge.getResourceCache().getAllLights();
+        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+        List<PHLight> allLights = bridge.getResourceCache().getAllLights();
+
+        PHGroup group = new PHGroup();
+
+        List  <String> lightIdentifiers = new ArrayList<String>();
 
         for (PHLight light : allLights) {
 
-            lightNames.add(light.getName());
+            lightIdentifiers.add(light.getName());
         }
 
-        PHGroup group1 = new PHGroup();
-        group1.setName("All");
-        group1.setLightIdentifiers(lightNames);
-        group1.setModelId("All");
-        selectedBridge.createGroup(group1, group);
+
+        group.setLightIdentifiers(lightIdentifiers);
+        group.setName("All");
+        bridge.createGroup(group, PHGroupListener);
+
+        int duration = Toast.LENGTH_LONG;
+        String result = "Group Created";
+
+        Toast toast = Toast.makeText(getApplicationContext(), result, duration);
+        toast.show();
 
     }
 
-    PHGroupListener group = new PHGroupListener() {
+    PHGroupListener PHGroupListener = new PHGroupListener() {
         @Override
         public void onCreated(PHGroup phGroup) {
 
@@ -682,32 +768,6 @@ public class EventAddition extends AppCompatActivity {
         }
     };
 
-    PHScheduleListener PHListener = new PHScheduleListener() {
-        @Override
-        public void onCreated(PHSchedule phSchedule) {
-
-        }
-
-        @Override
-        public void onSuccess() {
-
-        }
-
-        @Override
-        public void onError(int i, String s) {
-
-        }
-
-        @Override
-        public void onStateUpdate(Map<String, String> map, List<PHHueError> list) {
-
-            int duration = Toast.LENGTH_LONG;
-            String result = "Fired";
-
-            Toast toast = Toast.makeText(getApplicationContext(), result, duration);
-            toast.show();
-        }
-    };
 
     public void setLightStatusOn(){
 

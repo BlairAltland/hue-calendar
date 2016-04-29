@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Light Bulbs"
+        android:text="@string/light_bulbs"
         android:id="@+id/titleLabel"
         android:layout_centerHorizontal="true"
         android:gravity="center"
@@ -398,7 +398,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
+        android:text="@string/done_button"
         android:id="@+id/doneButton"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"

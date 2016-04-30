@@ -112,7 +112,26 @@ public class BasicActivity extends BaseActivity {
 
 /*
         while (cursor.moveToNext()) {
-            // Extract data.
+            //
+            // set start time
+            Calendar startTime = Calendar.getInstance();
+            startTime.set(Calendar.DAY_OF_MONTH, COLUMN_EVENT_START_MONTH);
+            startTime.set(Calendar.HOUR_OF_DAY, COLUMN_EVENT_START_HOUR);
+            startTime.set(Calendar.MINUTE, COLUMN_EVENT_START_MINUTE);
+            startTime.set(Calendar.MONTH, COLUMN_EVENT_START_MONTH);
+            startTime.set(Calendar.YEAR, COLUMN_EVENT_START_YEAR);
+
+            // set end time
+            Calendar endTime = (Calendar) startTime.clone();
+            endTime.set(Calendar.DAY_OF_MONTH, COLUMN_EVENT_END_MONTH);
+            endTime.set(Calendar.HOUR_OF_DAY, COLUMN_EVENT_END_HOUR);
+            endTime.set(Calendar.MINUTE, COLUMN_EVENT_END_MINUTE);
+            endTime.set(Calendar.MONTH, COLUMN_EVENT_END_MONTH);
+            endTime.set(Calendar.YEAR, COLUMN_EVENT_END_YEAR);
+
+            // set event name
+            WeekViewEvent event = new WeekViewEvent(1, COLUMN_EVENT_NAME, startTime, endTime);
+            events.add(event);
         }
 */
 

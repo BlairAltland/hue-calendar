@@ -618,6 +618,22 @@ public class EventAddition extends AppCompatActivity {
         bridge.updateSchedule(schedule, scheduleListener);
     }
 
+    public void remove(){ //String name, int month, int day, int hour, int min
+
+        //Set Calendar from Event Objects
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 15);
+        calendar.set(Calendar.MINUTE, 56);
+        Date date = calendar.getTime();
+
+        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+
+        //Create Schedule with Name of event
+        PHSchedule schedule = new PHSchedule("Test Schedule");
+
+        bridge.removeSchedule("Test Schedule",scheduleListener);
+    }
+
     public void scheduleLightsOn(){
 
         //Set Calendar from Event Objects

@@ -541,12 +541,13 @@ public class EventAddition extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 EventDB myDbHelper = new EventDB(getApplicationContext());
                 SQLiteDatabase db = myDbHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
 
 
-                values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, "Not Failing");
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, firstMinuteDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, firstHourDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, secondMinuteDisplay.getText().toString());
@@ -579,7 +580,7 @@ public class EventAddition extends AppCompatActivity {
                 //eventName.setText("");
                 tagName.setText("");
 
-                //scheduleLightsOff(eventName.getText().toString(), 4, 30, 12, 30);
+                scheduleLightsOff(); //"Test", 3, 30, 13, 43
                 //scheduleLightsOn();
                 Intent intent = new Intent(EventAddition.this, BasicActivity.class);
                 startActivity(intent);
@@ -589,32 +590,32 @@ public class EventAddition extends AppCompatActivity {
     }
 
 
-    public void scheduleLightsOff(String name, int month, int day, int hour, int min){
+    public void scheduleLightsOff(){ //String name, int month, int day, int hour, int min
 
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        calendar.set(Calendar.YEAR, 2016);
-        calendar.set(Calendar.HOUR, hour);
-        calendar.set(Calendar.MINUTE,min);
+        calendar.set(Calendar.HOUR_OF_DAY, 15);
+        calendar.set(Calendar.MINUTE, 56);
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
         //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule(name);
+        PHSchedule schedule = new PHSchedule("Test Schedule");
 
         PHLightState lightState = new PHLightState();
-        lightState.setOn(false);
+        //lightState.setOn(false);
 
+        lightState.setOn(true);
+        lightState.setHue(3000);
+
+        schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
         schedule.setLightState(lightState);
         schedule.setLightIdentifier("1");
         schedule.setDate(date);
         schedule.setStartTime(date);
         schedule.setLocalTime(true);
-        bridge.createSchedule(schedule, scheduleListener);
+        bridge.updateSchedule(schedule, scheduleListener);
     }
 
     public void scheduleLightsOn(){
@@ -656,8 +657,9 @@ public class EventAddition extends AppCompatActivity {
             sb.append(", ");
             sb.append(phSchedule.getLightState());
             sb.append(", ");
-            sb.append(phSchedule.getStartTime());
+            sb.append(phSchedule.getLocalTime());
             sb.append(", ");
+            sb.append(phSchedule.getStartTime());
             Log.w(TAG, sb.toString());
         }
 

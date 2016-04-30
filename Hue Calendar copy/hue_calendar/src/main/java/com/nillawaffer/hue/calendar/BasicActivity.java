@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Random;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 
 //TO DO
@@ -35,6 +37,7 @@ public class BasicActivity extends BaseActivity {
         EventDB dbHelper = new EventDB(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+
         /*
         public ArrayList<WeekViewEvent> getEvents() {
 
@@ -53,13 +56,13 @@ public class BasicActivity extends BaseActivity {
 
         }
 */
-        /*
+
         String[] projection = {
         Events.SubmitEvent.COLUMN_EVENT_NAME,
         Events.SubmitEvent.COLUMN_EVENT_START_MINUTE,
         Events.SubmitEvent.COLUMN_EVENT_START_HOUR,
         Events.SubmitEvent.COLUMN_EVENT_END_MINUTE,
-        Events.SubmitEvent.COLUMN_EVENT_END_HOUR",
+        Events.SubmitEvent.COLUMN_EVENT_END_HOUR,
         Events.SubmitEvent.COLUMN_EVENT_START_YEAR,
         Events.SubmitEvent.COLUMN_EVENT_START_MONTH,
         Events.SubmitEvent.COLUMN_EVENT_START_DAY,
@@ -75,7 +78,7 @@ public class BasicActivity extends BaseActivity {
         Events.SubmitEvent.COLUMN_EVENT_START_MINUTE,
         Events.SubmitEvent.COLUMN_EVENT_START_HOUR,
         Events.SubmitEvent.COLUMN_EVENT_END_MINUTE,
-        Events.SubmitEvent.COLUMN_EVENT_END_HOUR",
+        Events.SubmitEvent.COLUMN_EVENT_END_HOUR,
         Events.SubmitEvent.COLUMN_EVENT_START_YEAR,
         Events.SubmitEvent.COLUMN_EVENT_START_MONTH,
         Events.SubmitEvent.COLUMN_EVENT_START_DAY,
@@ -87,15 +90,9 @@ public class BasicActivity extends BaseActivity {
 
         //now going to call method to return cursor
 
-        Cursor cursor = db.query(Events.SubmitEvent.TABLE_NAME, //table to query
-                bind,
-                null, //columns for where, Null will return all rows
-                null, //values for where
-                null, //Group By, null is no group by
-                null, //Having, null says return all rows
-                null,
-                null,
-                null,
+        Cursor cursor = db.query(
+                Events.SubmitEvent.TABLE_NAME, //table to query
+                projection,
                 null,
                 null,
                 null,
@@ -103,41 +100,48 @@ public class BasicActivity extends BaseActivity {
                 null
         );
 
-        //the list items from the layout, will find these in the row_item, should have named them better
-        int[] to = new int[]{
-                Log.e("I shouldn't be here");
-        };
-*/
-
-
-/*
         while (cursor.moveToNext()) {
             //
             // set start time
+            /*
             Calendar startTime = Calendar.getInstance();
-            startTime.set(Calendar.DAY_OF_MONTH, COLUMN_EVENT_START_MONTH);
-            startTime.set(Calendar.HOUR_OF_DAY, COLUMN_EVENT_START_HOUR);
-            startTime.set(Calendar.MINUTE, COLUMN_EVENT_START_MINUTE);
-            startTime.set(Calendar.MONTH, COLUMN_EVENT_START_MONTH);
-            startTime.set(Calendar.YEAR, COLUMN_EVENT_START_YEAR);
+            startTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_START_DAY));
+            startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_START_HOUR));
+            startTime.set(Calendar.MINUTE, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE));
+            startTime.set(Calendar.MONTH, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_START_MONTH));
+            startTime.set(Calendar.YEAR, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_START_YEAR));
+
 
             // set end time
             Calendar endTime = (Calendar) startTime.clone();
-            endTime.set(Calendar.DAY_OF_MONTH, COLUMN_EVENT_END_MONTH);
-            endTime.set(Calendar.HOUR_OF_DAY, COLUMN_EVENT_END_HOUR);
-            endTime.set(Calendar.MINUTE, COLUMN_EVENT_END_MINUTE);
-            endTime.set(Calendar.MONTH, COLUMN_EVENT_END_MONTH);
-            endTime.set(Calendar.YEAR, COLUMN_EVENT_END_YEAR);
+            endTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_END_DAY));
+            endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_END_HOUR));
+            endTime.set(Calendar.MINUTE, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE));
+            endTime.set(Calendar.MONTH, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_END_MONTH));
+            endTime.set(Calendar.YEAR, Integer.parseInt(Events.SubmitEvent.COLUMN_EVENT_END_YEAR));
+            */
+            Calendar startTime = Calendar.getInstance();
+            Calendar endTime = (Calendar) startTime.clone();
+            int month = 4;
+
+            startTime = Calendar.getInstance();
+            startTime.set(Calendar.DAY_OF_MONTH, month);
+            startTime.set(Calendar.HOUR_OF_DAY, 9);
+            startTime.set(Calendar.MINUTE, 0);
+            startTime.set(Calendar.MONTH, newMonth-1);
+            startTime.set(Calendar.YEAR, newYear);
+            endTime = (Calendar) startTime.clone();
+            endTime.set(Calendar.HOUR_OF_DAY, 9);
+            endTime.set(Calendar.MINUTE, 50);
+            endTime.set(Calendar.MONTH, newMonth-1);
 
             // set event name
-            WeekViewEvent event = new WeekViewEvent(1, COLUMN_EVENT_NAME, startTime, endTime);
+            WeekViewEvent event = new WeekViewEvent(1, Events.SubmitEvent.COLUMN_EVENT_NAME, startTime, endTime);
+            event.setColor(getResources().getColor(R.color.event_color_01));
             events.add(event);
         }
-*/
 
-
-
-
+/*
         Calendar startTime = Calendar.getInstance();
 
         //Set Start Time
@@ -155,7 +159,7 @@ public class BasicActivity extends BaseActivity {
         //Configure Event                           Name    Start      End
         WeekViewEvent event = new WeekViewEvent(1, "Class", startTime, endTime);
         //Set Color
-        event.setColor(getResources().getColor(R.color.event_color_01));
+              event.setColor(getResources().getColor(R.color.event_color_01));
         //Create Event
         events.add(event);
 
@@ -916,7 +920,7 @@ public class BasicActivity extends BaseActivity {
         event = new WeekViewEvent(1, "Work", startTime, endTime);
         event.setColor(getResources().getColor(R.color.event_color_02));
         events.add(event);
-
+        */
         //Return all events
         return events;
     }
@@ -935,8 +939,13 @@ public class BasicActivity extends BaseActivity {
         int color10 = R.color.event_color_010;
 
         ArrayList<Integer> colorArray = new ArrayList<Integer>(10);
+        colorArray.add(color1, color2);
+        colorArray.add(color3, color4);
+        colorArray.add(color5, color6);
+        colorArray.add(color7, color8);
+        colorArray.add(color9, color10);
 
-        randomNumber = rand.nextInt(10 - 0) + 0;
+        randomNumber = rand.nextInt(9 - 0) + 0;
 
         int returnColor = colorArray.get(randomNumber);
         //remove this color form the array so it isnt used again for awhile

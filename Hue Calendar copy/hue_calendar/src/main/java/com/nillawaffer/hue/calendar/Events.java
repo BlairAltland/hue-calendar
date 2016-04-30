@@ -23,22 +23,6 @@ public final class Events{
         public static final String COLUMN_EVENT_END_DAY="secondDayDisplay";
         public static final String COLUMN_EVENT_TAGS="eventTags";
 
-
-        /*
-        public static final String TABLE_NAME="Events";
-        public static final String COLUMN_EVENT_NAME="eventName";
-        public static final int COLUMN_EVENT_START_MINUTE=0;
-        public static final int COLUMN_EVENT_START_HOUR=0;
-        public static final int COLUMN_EVENT_END_MINUTE=0;
-        public static final int COLUMN_EVENT_END_HOUR=0;
-        public static final int COLUMN_EVENT_START_YEAR=0;
-        public static final int COLUMN_EVENT_START_MONTH=0;
-        public static final int COLUMN_EVENT_START_DAY=0;
-        public static final int COLUMN_EVENT_END_YEAR=0;
-        public static final int COLUMN_EVENT_END_MONTH=0;
-        public static final int COLUMN_EVENT_END_DAY=0;
-        public static final String COLUMN_EVENT_TAGS="eventTags";
-        */
     }
 
 }

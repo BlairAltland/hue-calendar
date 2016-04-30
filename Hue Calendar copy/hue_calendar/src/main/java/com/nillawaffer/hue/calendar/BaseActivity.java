@@ -1,9 +1,12 @@
 package com.nillawaffer.hue.calendar;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,9 +39,30 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     String startTime = "0";
     String endTime = "0";
 
+
     private static final int MAX_HUE=65535;
     public static final String TAG = "Hue Calendar";
 
+    /*
+    public String getTableAsString(SQLiteDatabase db, String tableName) {
+        Log.d(TAG, "getTableAsString called");
+        String tableString = String.format("Table %s:\n", tableName);
+        Cursor allRows  = db.rawQuery("SELECT * FROM " + tableName, null);
+        if (allRows.moveToFirst() ){
+            String[] columnNames = allRows.getColumnNames();
+            do {
+                for (String name: columnNames) {
+                    tableString += String.format("%s: %s\n", name,
+                            allRows.getString(allRows.getColumnIndex(name)));
+                }
+                tableString += "\n";
+
+            } while (allRows.moveToNext());
+        }
+
+        return tableString;
+    }
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +97,8 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 startActivity(intent);
             }
         });
+
+        //getTableAsString(db, Events.SubmitEvent.TABLE_NAME);
     }
 
 

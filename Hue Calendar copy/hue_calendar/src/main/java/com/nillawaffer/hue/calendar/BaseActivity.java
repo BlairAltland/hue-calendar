@@ -93,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BaseActivity.this, PHHomeActivity.class);
+                Intent intent = new Intent(BaseActivity.this, EventAddition.class);
                 startActivity(intent);
             }
         });

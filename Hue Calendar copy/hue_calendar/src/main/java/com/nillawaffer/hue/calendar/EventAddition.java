@@ -581,6 +581,7 @@ public class EventAddition extends AppCompatActivity {
                 tagName.setText("");
 
                 scheduleLightsOff(); //"Test", 3, 30, 13, 43
+                //remove();
                 //scheduleLightsOn();
                 Intent intent = new Intent(EventAddition.this, BasicActivity.class);
                 startActivity(intent);
@@ -594,14 +595,14 @@ public class EventAddition extends AppCompatActivity {
 
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 56);
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 7);
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
         //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule("Test Schedule");
+        PHSchedule schedule = new PHSchedule("test");
 
         PHLightState lightState = new PHLightState();
         //lightState.setOn(false);
@@ -610,6 +611,7 @@ public class EventAddition extends AppCompatActivity {
         lightState.setHue(3000);
 
         schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
+        schedule.setIdentifier("test");
         schedule.setLightState(lightState);
         schedule.setLightIdentifier("1");
         schedule.setDate(date);
@@ -620,18 +622,9 @@ public class EventAddition extends AppCompatActivity {
 
     public void remove(){ //String name, int month, int day, int hour, int min
 
-        //Set Calendar from Event Objects
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 56);
-        Date date = calendar.getTime();
-
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
-        //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule("Test Schedule");
-
-        bridge.removeSchedule("Test Schedule",scheduleListener);
+        bridge.removeSchedule("goodnight",scheduleListener);
     }
 
     public void scheduleLightsOn(){
@@ -774,17 +767,4 @@ public class EventAddition extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        PHBridge bridge = phHueSDK.getSelectedBridge();
-        if (bridge != null) {
-
-            if (phHueSDK.isHeartbeatEnabled(bridge)) {
-                phHueSDK.disableHeartbeat(bridge);
-            }
-
-            phHueSDK.disconnect(bridge);
-            super.onDestroy();
-        }
-    }
 }

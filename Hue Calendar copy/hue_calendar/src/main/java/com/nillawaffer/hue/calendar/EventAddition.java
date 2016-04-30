@@ -116,6 +116,8 @@ public class EventAddition extends AppCompatActivity {
 
         phHueSDK = PHHueSDK.create();
 
+        getBridgeInfo();
+
         //add tappablity
         addListenerOnButton();
 
@@ -574,11 +576,11 @@ public class EventAddition extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), result, duration);
                 toast.show();
 
-                eventName.setText("");
+                //eventName.setText("");
                 tagName.setText("");
 
-                scheduleLightsOff();
-                scheduleLightsOn();
+                //scheduleLightsOff(eventName.getText().toString(), 4, 30, 12, 30);
+                //scheduleLightsOn();
                 Intent intent = new Intent(EventAddition.this, BasicActivity.class);
                 startActivity(intent);
 
@@ -587,22 +589,22 @@ public class EventAddition extends AppCompatActivity {
     }
 
 
-    public void scheduleLightsOff(){
+    public void scheduleLightsOff(String name, int month, int day, int hour, int min){
 
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
-        calendar.set(Calendar.MONTH, startMonth);
-        calendar.set(Calendar.DAY_OF_MONTH, startDay);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
         calendar.set(Calendar.YEAR, 2016);
-        calendar.set(Calendar.HOUR, startHour);
-        calendar.set(Calendar.MINUTE, startMin);
+        calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.MINUTE,min);
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
         //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule(eventName.getText().toString());
+        PHSchedule schedule = new PHSchedule(name);
 
         PHLightState lightState = new PHLightState();
         lightState.setOn(false);

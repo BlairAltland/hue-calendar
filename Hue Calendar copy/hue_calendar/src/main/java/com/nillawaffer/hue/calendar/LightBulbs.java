@@ -198,7 +198,8 @@ public class LightBulbs extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(LightBulbs.this, BasicActivity.class);
+                startActivity(intent);
             }
         });
 

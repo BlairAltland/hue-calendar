@@ -60,6 +60,9 @@ public class EventAddition extends AppCompatActivity {
     private int endMonth;
     private int endDay;
 
+    int finalStartMonth;
+    int finalEndMonth;
+
 
     EditText eventName;
     EditText tagName;
@@ -393,6 +396,8 @@ public class EventAddition extends AppCompatActivity {
                     month3 = month;
                     day2 = day;
 
+                    finalEndMonth = month3;
+
                     secondMonthDisplay.setText(
                             new StringBuilder()
                                     .append(month2));
@@ -507,6 +512,8 @@ public class EventAddition extends AppCompatActivity {
                     month3 = month;
                     day2 = day;
 
+                    finalStartMonth = month3;
+
                     firstMonthDisplay.setText(
                             new StringBuilder()
                                     .append(month2));
@@ -550,16 +557,16 @@ public class EventAddition extends AppCompatActivity {
                 ContentValues values = new ContentValues();
 
 
-                values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, "Not Failing");
+                values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, firstMinuteDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, firstHourDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, secondMinuteDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, secondHourDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, firstYearDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, firstMonthDisplay.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, finalStartMonth);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, firstDayDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_YEAR, secondYearDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, secondMonthDisplay.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, finalEndMonth);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, secondDayDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
 
@@ -583,7 +590,7 @@ public class EventAddition extends AppCompatActivity {
                 //eventName.setText("");
                 tagName.setText("");
 
-                //scheduleLightsOff(); //"Test", 3, 30, 13, 43
+                scheduleLightsOff(); //"Test", 3, 30, 13, 43
                 //scheduleLightsOn();
                 //remove();
                 //scheduleLightsOn();
@@ -593,6 +600,34 @@ public class EventAddition extends AppCompatActivity {
         });
     }
 
+    //Schedules the lights to turn off
+    public void scheduleLightsOff(){
+        //Set Calendar from Event Objects
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 44);
+        Date date = calendar.getTime();
+
+        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+
+        //Create Schedule with Name of event
+        PHSchedule schedule = new PHSchedule(eventName.getText().toString());
+
+        PHLightState lightState = new PHLightState();
+
+        lightState.setOn(false);
+        //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
+        schedule.setIdentifier("scheduler");
+        schedule.setLightState(lightState);
+        schedule.setLightIdentifier("ID");
+        schedule.setDate(date);
+        schedule.setStartTime(date);
+        schedule.setLocalTime(true);
+        schedule.setAutoDelete(true);
+        bridge.updateSchedule(schedule, scheduleListener);
+
+    }
+/*
     //Schedules the lights to turn off
     public void scheduleLightsOff(){
         //Set Calendar from Event Objects
@@ -622,7 +657,7 @@ public class EventAddition extends AppCompatActivity {
         bridge.updateSchedule(schedule, scheduleListener);
 
     }
-
+*/
     //Schedules the lights to turn off
     public void scheduleLightsOn(){
         //Set Calendar from Event Objects

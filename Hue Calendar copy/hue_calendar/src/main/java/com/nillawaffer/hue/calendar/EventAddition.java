@@ -61,22 +61,21 @@ public class EventAddition extends AppCompatActivity {
     private int endDay;
 
 
-    private EditText eventName;
-    private EditText tagName;
-    private EditText eventRepeat;
-    private TextView firstHourDisplay;
-    private TextView firstMinuteDisplay;
-    private Button pickTime;
+    EditText eventName;
+    EditText tagName;
+    TextView firstHourDisplay;
+    TextView firstMinuteDisplay;
+    Button pickTime;
 
-    private int pHour;
-    private int pMinute;
+    int pHour;
+    int pMinute;
     /** This integer will uniquely define the dialog to be used for displaying time picker.*/
     static final int TIME_DIALOG_ID = 0;
 
-    private TextView firstMonthDisplay;
-    private TextView firstDayDisplay;
-    private TextView firstYearDisplay;
-    private Button pickDate;
+    TextView firstMonthDisplay;
+    TextView firstDayDisplay;
+    TextView firstYearDisplay;
+    Button pickDate;
 
     private int year2;
     private int month3;
@@ -85,14 +84,14 @@ public class EventAddition extends AppCompatActivity {
     static final int DATE_DIALOG_ID = 2;
     static final int DATE_DIALOG_ID2 = 3;
 
-    private TextView secondMonthDisplay;
-    private TextView secondDayDisplay;
-    private TextView secondYearDisplay;
-    private Button pickDate2;
+    TextView secondMonthDisplay;
+    TextView secondDayDisplay;
+    TextView secondYearDisplay;
+    Button pickDate2;
 
-    private TextView secondHourDisplay;
-    private TextView secondMinuteDisplay;
-    private Button pickTime2;
+    TextView secondHourDisplay;
+    TextView secondMinuteDisplay;
+    Button pickTime2;
 
     private int pHour2;
     private int pMinute2;
@@ -210,9 +209,9 @@ public class EventAddition extends AppCompatActivity {
             month2 = "December";
         }
 
-        startYear = year;
-        startMonth = month;
-        startDay = day;
+        //startYear = year;
+        //startMonth = month;
+        //startDay = day;
 
         firstMonthDisplay.setText(
                 new StringBuilder()
@@ -547,7 +546,7 @@ public class EventAddition extends AppCompatActivity {
             public void onClick(View view) {
 
                 EventDB myDbHelper = new EventDB(getApplicationContext());
-                SQLiteDatabase db = myDbHelper.getWritableDatabase();
+                SQLiteDatabase db = myDbHelper.getReadableDatabase();
                 ContentValues values = new ContentValues();
 
 
@@ -584,8 +583,8 @@ public class EventAddition extends AppCompatActivity {
                 //eventName.setText("");
                 tagName.setText("");
 
-                scheduleLightsOff(); //"Test", 3, 30, 13, 43
-                scheduleLightsOn();
+                //scheduleLightsOff(); //"Test", 3, 30, 13, 43
+                //scheduleLightsOn();
                 //remove();
                 //scheduleLightsOn();
                 finish();
@@ -598,16 +597,16 @@ public class EventAddition extends AppCompatActivity {
     public void scheduleLightsOff(){
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(firstHourDisplay.getText().toString()));
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
         calendar.set(Calendar.MINUTE, Integer.parseInt(firstMinuteDisplay.getText().toString()));
         calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(firstDayDisplay.getText().toString()));
-        calendar.set(Calendar.MONTH, Integer.parseInt(firstMonthDisplay.getText().toString()));
+        calendar.set(Calendar.MONTH, startMonth);
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
         //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule("test");
+        PHSchedule schedule = new PHSchedule(eventName.getText().toString());
 
         PHLightState lightState = new PHLightState();
 
@@ -615,7 +614,7 @@ public class EventAddition extends AppCompatActivity {
         //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
         schedule.setIdentifier("scheduler");
         schedule.setLightState(lightState);
-        schedule.setLightIdentifier("1");
+        schedule.setLightIdentifier("ID");
         schedule.setDate(date);
         schedule.setStartTime(date);
         schedule.setLocalTime(true);
@@ -628,16 +627,16 @@ public class EventAddition extends AppCompatActivity {
     public void scheduleLightsOn(){
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(secondHourDisplay.getText().toString()));
+        calendar.set(Calendar.HOUR_OF_DAY, endHour);
         calendar.set(Calendar.MINUTE, Integer.parseInt(secondMinuteDisplay.getText().toString()));
         calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(secondDayDisplay.getText().toString()));
-        calendar.set(Calendar.MONTH, Integer.parseInt(secondMonthDisplay.getText().toString()));
+        calendar.set(Calendar.MONTH, endMonth);
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
         //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule("test");
+        PHSchedule schedule = new PHSchedule(eventName.getText().toString());
 
         PHLightState lightState = new PHLightState();
 
@@ -645,21 +644,13 @@ public class EventAddition extends AppCompatActivity {
         //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
         schedule.setIdentifier("scheduler");
         schedule.setLightState(lightState);
-        schedule.setLightIdentifier("1");
+        schedule.setLightIdentifier("ID");
         schedule.setDate(date);
         schedule.setStartTime(date);
         schedule.setLocalTime(true);
         schedule.setAutoDelete(true);
         bridge.updateSchedule(schedule, scheduleListener);
 
-    }
-
-    //Remove a schedule
-    public void remove(){ //String name, int month, int day, int hour, int min
-
-        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
-
-        bridge.removeSchedule("goodnight",scheduleListener);
     }
 
     //Listens for a schedule to be created
@@ -746,7 +737,6 @@ public class EventAddition extends AppCompatActivity {
         @Override
         public void onSearchComplete() {}
     };
-
 
     public void getBridgeInfo() {
 

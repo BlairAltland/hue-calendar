@@ -20,7 +20,6 @@
         app:headerRowBackgroundColor="@color/toolbar"
         app:dayBackgroundColor="#05000000"
         app:todayBackgroundColor="#1848adff"
-        app:headerColumnBackground="#ffffffff"
-        />
+        app:headerColumnBackground="#ffffffff"/>
 
 </RelativeLayout>

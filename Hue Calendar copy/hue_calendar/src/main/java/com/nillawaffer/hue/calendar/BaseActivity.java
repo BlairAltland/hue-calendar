@@ -43,26 +43,6 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     private static final int MAX_HUE=65535;
     public static final String TAG = "Hue Calendar";
 
-    /*
-    public String getTableAsString(SQLiteDatabase db, String tableName) {
-        Log.d(TAG, "getTableAsString called");
-        String tableString = String.format("Table %s:\n", tableName);
-        Cursor allRows  = db.rawQuery("SELECT * FROM " + tableName, null);
-        if (allRows.moveToFirst() ){
-            String[] columnNames = allRows.getColumnNames();
-            do {
-                for (String name: columnNames) {
-                    tableString += String.format("%s: %s\n", name,
-                            allRows.getString(allRows.getColumnIndex(name)));
-                }
-                tableString += "\n";
-
-            } while (allRows.moveToNext());
-        }
-
-        return tableString;
-    }
-    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +68,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        //Sets up add event button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,10 +83,12 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
+        //Hide some irrelevant menu items
         menu.getItem(0).setVisible(false);
         menu.getItem(8).setVisible(false);
         menu.getItem(7).setVisible(false);
@@ -160,10 +143,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 return true;
 
             case R.id.PHbulbActivity:
-                Intent intent = new Intent(this, PHBulbActivity.class);
+                Intent intent = new Intent(this, LightBulbs.class);
                 startActivity(intent);
                 return true;
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -201,6 +183,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
     }
 
+    //Handles clicking on an event
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
 
@@ -244,6 +227,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         startActivity(intent);
     }
 
+    //Handles long presses
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
         Toast.makeText(this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();

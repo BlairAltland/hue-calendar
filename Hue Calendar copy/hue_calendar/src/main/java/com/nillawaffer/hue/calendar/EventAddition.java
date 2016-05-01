@@ -33,6 +33,7 @@ import com.philips.lighting.hue.listener.PHGroupListener;
 import com.philips.lighting.hue.listener.PHLightListener;
 import com.philips.lighting.hue.listener.PHScheduleListener;
 import com.philips.lighting.hue.sdk.PHHueSDK;
+import com.philips.lighting.hue.sdk.PHMessageType;
 import com.philips.lighting.model.PHBridge;
 import com.philips.lighting.model.PHBridgeResource;
 import com.philips.lighting.model.PHBridgeResourcesCache;
@@ -114,7 +115,10 @@ public class EventAddition extends AppCompatActivity {
         //setSupportActionBar(toolbar);
         addButton = (Button) findViewById(R.id.buttonadd);
 
-        phHueSDK = PHHueSDK.create();
+        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+
+        phHueSDK = PHHueSDK.getInstance();
+        phHueSDK.enableHeartbeat(bridge, PHHueSDK.HB_INTERVAL);
 
         getBridgeInfo();
 
@@ -525,14 +529,14 @@ public class EventAddition extends AppCompatActivity {
             return "0" + String.valueOf(c);
     }
 
+    //Handle adding an event as well as closing the addition view.
     public void addListenerOnButton() {
 
         cancelButton = (Button) findViewById(R.id.buttoncancel);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EventAddition.this, BasicActivity.class);
-                startActivity(intent);
+                finish();
 
             }
         });
@@ -581,22 +585,23 @@ public class EventAddition extends AppCompatActivity {
                 tagName.setText("");
 
                 scheduleLightsOff(); //"Test", 3, 30, 13, 43
+                scheduleLightsOn();
                 //remove();
                 //scheduleLightsOn();
-                Intent intent = new Intent(EventAddition.this, BasicActivity.class);
-                startActivity(intent);
+                finish();
 
             }
         });
     }
 
-
-    public void scheduleLightsOff(){ //String name, int month, int day, int hour, int min
-
+    //Schedules the lights to turn off
+    public void scheduleLightsOff(){
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 7);
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(firstHourDisplay.getText().toString()));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(firstMinuteDisplay.getText().toString()));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(firstDayDisplay.getText().toString()));
+        calendar.set(Calendar.MONTH, Integer.parseInt(firstMonthDisplay.getText().toString()));
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
@@ -605,21 +610,51 @@ public class EventAddition extends AppCompatActivity {
         PHSchedule schedule = new PHSchedule("test");
 
         PHLightState lightState = new PHLightState();
-        //lightState.setOn(false);
 
-        lightState.setOn(true);
-        lightState.setHue(3000);
-
-        schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
-        schedule.setIdentifier("test");
+        lightState.setOn(false);
+        //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
+        schedule.setIdentifier("scheduler");
         schedule.setLightState(lightState);
         schedule.setLightIdentifier("1");
         schedule.setDate(date);
         schedule.setStartTime(date);
         schedule.setLocalTime(true);
+        schedule.setAutoDelete(true);
         bridge.updateSchedule(schedule, scheduleListener);
+
     }
 
+    //Schedules the lights to turn off
+    public void scheduleLightsOn(){
+        //Set Calendar from Event Objects
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(secondHourDisplay.getText().toString()));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(secondMinuteDisplay.getText().toString()));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(secondDayDisplay.getText().toString()));
+        calendar.set(Calendar.MONTH, Integer.parseInt(secondMonthDisplay.getText().toString()));
+        Date date = calendar.getTime();
+
+        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+
+        //Create Schedule with Name of event
+        PHSchedule schedule = new PHSchedule("test");
+
+        PHLightState lightState = new PHLightState();
+
+        lightState.setOn(false);
+        //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
+        schedule.setIdentifier("scheduler");
+        schedule.setLightState(lightState);
+        schedule.setLightIdentifier("1");
+        schedule.setDate(date);
+        schedule.setStartTime(date);
+        schedule.setLocalTime(true);
+        schedule.setAutoDelete(true);
+        bridge.updateSchedule(schedule, scheduleListener);
+
+    }
+
+    //Remove a schedule
     public void remove(){ //String name, int month, int day, int hour, int min
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
@@ -627,35 +662,7 @@ public class EventAddition extends AppCompatActivity {
         bridge.removeSchedule("goodnight",scheduleListener);
     }
 
-    public void scheduleLightsOn(){
-
-        //Set Calendar from Event Objects
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-
-        calendar.set(Calendar.MONTH, endMonth);
-        calendar.set(Calendar.DAY_OF_MONTH, endDay);
-        calendar.set(Calendar.YEAR, 2016);
-        calendar.set(Calendar.HOUR, endHour);
-        calendar.set(Calendar.MINUTE, endMin);
-        Date date = calendar.getTime();
-
-        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
-
-        //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule(eventName.getText().toString());
-
-        PHLightState lightState = new PHLightState();
-        lightState.setOn(true);
-
-        schedule.setLightState(lightState);
-        schedule.setLightIdentifier("1");
-        schedule.setDate(date);
-        schedule.setStartTime(date);
-        schedule.setLocalTime(true);
-        bridge.createSchedule(schedule, scheduleListener);
-    }
-
+    //Listens for a schedule to be created
     PHScheduleListener scheduleListener = new PHScheduleListener() {
         @Override
         public void onCreated(PHSchedule phSchedule) {
@@ -761,10 +768,38 @@ public class EventAddition extends AppCompatActivity {
             sb.append(", ");
         }
 
+        List<PHGroup> myGroups = cache.getAllGroups();
+
+        sb.append("Groups: ");
+
+        for (PHGroup group : myGroups){
+
+
+            sb.append(group.getName());
+            sb.append(", ");
+        }
+
         String result = sb.toString();
 
         Log.w(TAG, result);
 
     }
+
+    @Override
+    protected void onDestroy() {
+        PHBridge bridge = phHueSDK.getSelectedBridge();
+        if (bridge != null) {
+
+            if (phHueSDK.isHeartbeatEnabled(bridge)) {
+                phHueSDK.disableHeartbeat(bridge);
+            }
+
+            phHueSDK.disconnect(bridge);
+            super.onDestroy();
+        }
+    }
+
+
+
 
 }

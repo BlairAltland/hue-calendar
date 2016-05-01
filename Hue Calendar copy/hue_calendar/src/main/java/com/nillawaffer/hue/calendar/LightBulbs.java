@@ -174,21 +174,6 @@ public class LightBulbs extends AppCompatActivity {
         } catch ( IndexOutOfBoundsException e ) {
             label12.setText("");
         }
-
-
-        /*
-        for (TextView text : textViews){
-
-            for (PHLight light : Lights) {
-
-
-                text.setText(light.getName());
-                //Lights.remove(Lights.size() - 1);
-            }
-        }
-           */
-        //if lights(0) != null
-        //label1 = lights(0)
     }
 
 

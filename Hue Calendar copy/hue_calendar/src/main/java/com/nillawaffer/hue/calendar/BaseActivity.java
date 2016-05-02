@@ -1,3 +1,15 @@
+/*
+Author Blair Altland
+Date: 5/2/2016
+
+	This activity provides the structure of the calendar as well
+	as sets up the floating action button. It handles the interactions
+	between the calendar and the individual events and the rest of the application
+	itself. Also configures the menu and allows for switching between a  day, 3 day and
+	week view for the calendar.
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 import android.database.Cursor;
@@ -26,6 +38,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
 
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     private static final int TYPE_DAY_VIEW = 1;
@@ -74,7 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BaseActivity.this, EventAddition.class);
+                Intent intent = new Intent(BaseActivity.this, PHHomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -143,7 +156,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 return true;
 
             case R.id.PHbulbActivity:
-                Intent intent = new Intent(this, LightBulbs.class);
+                Intent intent = new Intent(this, PHBulbActivity.class);
                 startActivity(intent);
                 return true;
         }
@@ -196,6 +209,8 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
         int startMin = event.getStartTime().getTime().getMinutes();
 
+        String tag = event.getTag();
+
         if (startMin == 0) {
 
             startMinString = "00";
@@ -223,7 +238,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
         intent.putExtra("pushEndTime", endTime);
         intent.putExtra("pushEndMin", endMinString);
-        intent.putExtra("pushTag", "Busy");
+        intent.putExtra("pushTag", tag);
         startActivity(intent);
     }
 

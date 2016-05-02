@@ -1,3 +1,10 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+Controls showing all of the different bridges one could connect to.
+
+ */
 package com.nillawaffer.hue.calendar;
 
 import java.util.List;
@@ -13,11 +20,7 @@ import android.widget.TextView;
 import com.philips.lighting.hue.sdk.PHAccessPoint;
 
 
-/**
- * This class provides adapter view for a list of Found Bridges.
- *
- * @author SteveyO.
- */
+
 public class AccessPointListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<PHAccessPoint> accessPoints;

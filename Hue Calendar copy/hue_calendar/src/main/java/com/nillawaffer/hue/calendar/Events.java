@@ -1,3 +1,11 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+    Instantiates the database.
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 import android.provider.BaseColumns;

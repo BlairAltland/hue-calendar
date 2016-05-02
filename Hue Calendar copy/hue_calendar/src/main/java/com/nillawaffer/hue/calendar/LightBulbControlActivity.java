@@ -1,3 +1,14 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	This activity allows for direct interaction with a specific bulb;
+	if one wants to turn manually change the color brightness or another attribute of a bulb,
+	this page allows for that.
+
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 import java.util.List;
@@ -201,7 +212,7 @@ public class LightBulbControlActivity extends AppCompatActivity {
                                 stringB.append(red);
                                 stringB.append(green);
                                 stringB.append(blue);
-                                Toast.makeText(getApplicationContext(), stringB, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Color Changed", Toast.LENGTH_SHORT).show();
 
                                 PHBridge bridge = phHueSDK.getSelectedBridge();
 

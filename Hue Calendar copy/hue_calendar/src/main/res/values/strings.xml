@@ -3,7 +3,7 @@
 
     //App files
     <string name="app_name">Hue Calendar</string>
-    <color name="background">#76e6e2</color>
+    <color name="background">#ffffff</color>
 
     //Activities
     <string name="action_today">Today</string>

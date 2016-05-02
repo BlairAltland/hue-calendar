@@ -1,3 +1,13 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	Allows for events to be added to the calendar though the use of a date and time picker.
+	The activity stores the data taken from the user and stores it in the database and
+	also schedules the lights to turn on and off based upon the event they have just created.
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 import android.app.DatePickerDialog;
@@ -551,7 +561,8 @@ public class EventAddition extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(EventAddition.this, BasicActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -567,9 +578,9 @@ public class EventAddition extends AppCompatActivity {
 
                 values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, firstMinuteDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, firstHourDisplay.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, Integer.toString(pHour));
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, secondMinuteDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, secondHourDisplay.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, Integer.toString(pHour2));
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, firstYearDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, Integer.toString(finalStartMonth));
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, firstDayDisplay.getText().toString());
@@ -598,11 +609,12 @@ public class EventAddition extends AppCompatActivity {
                 //eventName.setText("");
                 tagName.setText("");
 
-                scheduleLightsOff(); //"Test", 3, 30, 13, 43
-                //scheduleLightsOn();
+                scheduleLightsOff();
+                scheduleLightsOn();
                 //remove();
                 //scheduleLightsOn();
-                finish();
+                Intent intent = new Intent(EventAddition.this, BasicActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -612,49 +624,19 @@ public class EventAddition extends AppCompatActivity {
     public void scheduleLightsOff(){
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 44);
-        Date date = calendar.getTime();
-
-        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
-
-        //Create Schedule with Name of event
-        PHSchedule schedule = new PHSchedule(eventName.getText().toString());
-
-        PHLightState lightState = new PHLightState();
-
-        lightState.setOn(false);
-        //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
-        schedule.setIdentifier("scheduler");
-        schedule.setLightState(lightState);
-        schedule.setLightIdentifier("ID");
-        schedule.setDate(date);
-        schedule.setStartTime(date);
-        schedule.setLocalTime(true);
-        schedule.setAutoDelete(true);
-        bridge.updateSchedule(schedule, scheduleListener);
-
-    }
-/*
-    //Schedules the lights to turn off
-    public void scheduleLightsOff(){
-        //Set Calendar from Event Objects
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.HOUR_OF_DAY, pHour);
         calendar.set(Calendar.MINUTE, Integer.parseInt(firstMinuteDisplay.getText().toString()));
+        calendar.set(Calendar.MONTH, finalStartMonth);
         calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(firstDayDisplay.getText().toString()));
-        calendar.set(Calendar.MONTH, startMonth);
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
-        //Create Schedule with Name of event
         PHSchedule schedule = new PHSchedule(eventName.getText().toString());
 
         PHLightState lightState = new PHLightState();
 
         lightState.setOn(false);
-        //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
         schedule.setIdentifier("scheduler");
         schedule.setLightState(lightState);
         schedule.setLightIdentifier("ID");
@@ -662,29 +644,28 @@ public class EventAddition extends AppCompatActivity {
         schedule.setStartTime(date);
         schedule.setLocalTime(true);
         schedule.setAutoDelete(true);
-        bridge.updateSchedule(schedule, scheduleListener);
+        bridge.createSchedule(schedule, scheduleListener);
 
     }
-*/
+
+
     //Schedules the lights to turn off
     public void scheduleLightsOn(){
         //Set Calendar from Event Objects
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, endHour);
+        calendar.set(Calendar.HOUR_OF_DAY, pHour);
         calendar.set(Calendar.MINUTE, Integer.parseInt(secondMinuteDisplay.getText().toString()));
+        calendar.set(Calendar.MONTH, finalEndMonth);
         calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(secondDayDisplay.getText().toString()));
-        calendar.set(Calendar.MONTH, endMonth);
         Date date = calendar.getTime();
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
-        //Create Schedule with Name of event
         PHSchedule schedule = new PHSchedule(eventName.getText().toString());
 
         PHLightState lightState = new PHLightState();
 
         lightState.setOn(false);
-        //schedule.setRecurringDays(PHSchedule.RecurringDay.RECURRING_ALL_DAY.getValue());
         schedule.setIdentifier("scheduler");
         schedule.setLightState(lightState);
         schedule.setLightIdentifier("ID");
@@ -741,10 +722,22 @@ public class EventAddition extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        //Hide some irrelevant menu items
+        menu.getItem(0).setVisible(false);
+        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
+        menu.getItem(3).setVisible(false);
+        menu.getItem(4).setVisible(false);
+        menu.getItem(5).setVisible(false);
+        menu.getItem(8).setVisible(false);
+        menu.getItem(7).setVisible(false);
+        menu.getItem(6).setVisible(false);
+
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

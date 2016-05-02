@@ -1,13 +1,3 @@
-/*
-Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
-Date: 5/2/2016
-
-	Both allow for activities to interact with the lights.
-	They are segue classes and exist primarily to make a connection to the bridge.
-
-
- */
-
 package com.nillawaffer.hue.calendar;
 
 import android.app.Activity;
@@ -46,7 +36,7 @@ import java.util.List;
  *
  *
  */
-public class PHStartActivity extends Activity implements OnItemClickListener {
+public class PHEditActivity extends Activity implements OnItemClickListener {
 
     private PHHueSDK phHueSDK;
     public static final String TAG = "Hue Calendar";
@@ -62,6 +52,10 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
 
         // Gets an instance of the Hue SDK.
         phHueSDK = PHHueSDK.create();
+
+        // Set the Device Name (name of your app). This will be stored in your bridge whitelist entry.
+        phHueSDK.setAppName("Hue Calendar");
+        phHueSDK.setDeviceName(Build.MODEL);
 
         // Register the PHSDKListener to receive callbacks from the bridge.
         phHueSDK.getNotificationManager().registerSDKListener(listener);
@@ -84,7 +78,7 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
             lastAccessPoint.setUsername(lastUsername);
 
             if (!phHueSDK.isAccessPointConnected(lastAccessPoint)) {
-                PHWizardAlertActivity.getInstance().showProgressDialog(R.string.connecting, PHStartActivity.this);
+                PHWizardAlertActivity.getInstance().showProgressDialog(R.string.connecting, PHEditActivity.this);
                 phHueSDK.connect(lastAccessPoint);
             }
         }
@@ -127,17 +121,7 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
 
         @Override
         public void onCacheUpdated(List<Integer> arg0, PHBridge bridge) {
-            StringBuilder sb = new StringBuilder();
-
-            sb.append("On CacheUpdated: ");
-
-            for (int listItem : arg0) {
-                sb.append(listItem);
-                sb.append(", ");
-            }
-
-            sb.append(bridge);
-            Log.w(TAG, sb.toString());
+            Log.w(TAG, "On CacheUpdated");
 
         }
 
@@ -156,13 +140,13 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
         public void onAuthenticationRequired(PHAccessPoint accessPoint) {
             Log.w(TAG, "Authentication Required.");
             phHueSDK.startPushlinkAuthentication(accessPoint);
-            startActivity(new Intent(PHStartActivity.this, PHPushLinkActivity.class));
+            startActivity(new Intent(PHEditActivity.this, PHPushLinkActivity.class));
 
         }
 
         @Override
         public void onConnectionResumed(PHBridge bridge) {
-            if (PHStartActivity.this.isFinishing())
+            if (PHEditActivity.this.isFinishing())
                 return;
 
             Log.v(TAG, "onConnectionResumed" + bridge.getResourceCache().getBridgeConfiguration().getIpAddress());
@@ -197,10 +181,10 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
             else if (code == PHHueError.BRIDGE_NOT_RESPONDING) {
                 Log.w(TAG, "Bridge Not Responding . . . ");
                 PHWizardAlertActivity.getInstance().closeProgressDialog();
-                PHStartActivity.this.runOnUiThread(new Runnable() {
+                PHEditActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        PHWizardAlertActivity.showErrorDialog(PHStartActivity.this, message, R.string.btn_ok);
+                        PHWizardAlertActivity.showErrorDialog(PHEditActivity.this, message, R.string.btn_ok);
                     }
                 });
 
@@ -215,10 +199,10 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
                 }
                 else {
                     PHWizardAlertActivity.getInstance().closeProgressDialog();
-                    PHStartActivity.this.runOnUiThread(new Runnable() {
+                    PHEditActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            PHWizardAlertActivity.showErrorDialog(PHStartActivity.this, message, R.string.btn_ok);
+                            PHWizardAlertActivity.showErrorDialog(PHEditActivity.this, message, R.string.btn_ok);
                         }
                     });
                 }
@@ -275,12 +259,12 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
                 phHueSDK.disconnect(connectedBridge);
             }
         }
-        PHWizardAlertActivity.getInstance().showProgressDialog(R.string.connecting, PHStartActivity.this);
+        PHWizardAlertActivity.getInstance().showProgressDialog(R.string.connecting, PHEditActivity.this);
         phHueSDK.connect(accessPoint);
     }
 
     public void doBridgeSearch() {
-        PHWizardAlertActivity.getInstance().showProgressDialog(R.string.search_progress, PHStartActivity.this);
+        PHWizardAlertActivity.getInstance().showProgressDialog(R.string.search_progress, PHEditActivity.this);
         PHBridgeSearchManager sm = (PHBridgeSearchManager) phHueSDK.getSDKService(PHHueSDK.SEARCH_BRIDGE);
         // Start the UPNP Searching of local bridges.
         sm.search(true, true);
@@ -288,7 +272,7 @@ public class PHStartActivity extends Activity implements OnItemClickListener {
 
     // Starting the main activity this way, prevents the PushLink Activity being shown when pressing the back button.
     public void startMainActivity() {
-        Intent intent = new Intent(getApplicationContext(), BasicActivity.class);
+        Intent intent = new Intent(getApplicationContext(), EventEdit.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)

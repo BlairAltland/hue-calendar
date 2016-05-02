@@ -1,3 +1,15 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	This activity provides the structure of the calendar as well
+	as sets up the floating action button. It handles the interactions
+	between the calendar and the individual events and the rest of the application
+	itself. Also configures the menu and allows for switching between a  day, 3 day and
+	week view for the calendar.
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 import com.alamkanak.weekview.WeekViewEvent;
@@ -86,7 +98,7 @@ public class BasicActivity extends BaseActivity {
 
         Log.w(TAG, sb.toString());
         */
-         if(cursor.moveToNext()){
+         while(cursor.moveToNext()){
 
             //Log.w(TAG, "IM IN HERE");
                  Calendar startTime = Calendar.getInstance();
@@ -102,17 +114,26 @@ public class BasicActivity extends BaseActivity {
                  Calendar endTime = (Calendar) startTime.clone();
                  endTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_DAY))));
                  endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_HOUR))));
+                 //endTime.set(Calendar.HOUR_OF_DAY, 20);
                  endTime.set(Calendar.MINUTE, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE))));
-                 endTime.set(Calendar.MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MONTH))));
+                 int month = Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MONTH)));
+                 endTime.set(Calendar.MONTH, month);
                  //endTime.set(Calendar.MONTH, 4);
                  endTime.set(Calendar.YEAR, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_YEAR))));
 
+             if (month == newMonth){
 
                  // set event name
                  WeekViewEvent event = new WeekViewEvent(1, cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_NAME)), startTime, endTime);
                  event.setColor(getResources().getColor(setRandomColor()));
+                 event.setTag((cursor.getString(cursor.getColumnIndex(Events.SubmitEvent._ID))));
                  events.add(event);
                  Log.w(TAG, "ADDED");
+
+             }else{
+
+                 Log.w(TAG, "Not Equal");
+             }
         }
 
 

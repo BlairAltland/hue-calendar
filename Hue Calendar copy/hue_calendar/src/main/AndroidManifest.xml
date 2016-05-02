@@ -12,15 +12,18 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PHStartActivity"
+            android:name=".splashActivity"
             android:icon="@drawable/hueicon"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/SplashTheme.Launcher">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            </activity>
+        <activity android:name=".BasicActivity" />
         <activity
             android:name=".LightBulbs"
             android:label="@string/light_bulbs"></activity>
@@ -46,8 +49,12 @@
             android:name=".PHBulbActivity"
             android:label="@string/light_bulbs"></activity>
         <activity
-            android:name=".BasicActivity"
-            android:label="@string/app_name"></activity>
+            android:name=".PHDetailActivity"
+            android:label="@string/light_bulbs"></activity>
+        <activity
+            android:name=".PHEditActivity"
+            android:label="@string/event_detail"></activity>
+
 
     </application>
 

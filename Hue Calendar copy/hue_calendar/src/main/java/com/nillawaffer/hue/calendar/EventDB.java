@@ -1,5 +1,12 @@
-package com.nillawaffer.hue.calendar;
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
 
+	Handles the creation of the database.
+
+ */
+
+package com.nillawaffer.hue.calendar;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +16,7 @@ import com.alamkanak.weekview.sample.apiclient.Event;
 
 public class EventDB extends SQLiteOpenHelper{
 
-    public static final int DATABASE_VERSION=5;
+    public static final int DATABASE_VERSION=7;
     public static final String DATABASE_NAME="events.db";
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP=",";

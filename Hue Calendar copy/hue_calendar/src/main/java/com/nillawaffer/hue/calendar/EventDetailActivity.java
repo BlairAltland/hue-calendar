@@ -1,11 +1,24 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	Handles the landing page of an event.
+	It pulls data from the calendar and displays it to provide more information about the event.
+	Allows a user the ability to edit the event .
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TableRow;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -62,9 +75,9 @@ public class EventDetailActivity extends AppCompatActivity {
         //Create the labels
         setLabelsBlank();
         //setLabelText();
-        setLabelsFromBridge();
+        //setLabelsFromBridge();
 
-        setImageButtonContent();
+        //setImageButtonContent();
 
         addListenerOnButton();
     }
@@ -74,32 +87,32 @@ public class EventDetailActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-            name = extras.getString("pushName");
-            startTime = extras.getString("pushStartTime");
-            startMin = extras.getString("pushStartMin");
+        name = extras.getString("pushName");
+        startTime = extras.getString("pushStartTime");
+        startMin = extras.getString("pushStartMin");
 
-            endTime = extras.getString("pushEndTime");
-            endMin = extras.getString("pushEndMin");
+        endTime = extras.getString("pushEndTime");
+        endMin = extras.getString("pushEndMin");
 
-            tag = extras.getString("pushTag");
+        tag = extras.getString("pushTag");
 
-            TextView nameField = (TextView) findViewById(R.id.name);
-            nameField.setText(name);
+        TextView nameField = (TextView) findViewById(R.id.name);
+        nameField.setText(name);
 
-            TextView startTimeField = (TextView) findViewById(R.id.startTime);
-            startTimeField.setText(startTime);
-            TextView startMinField = (TextView) findViewById(R.id.startMin);
-            startMinField.setText(startMin);
+        TextView startTimeField = (TextView) findViewById(R.id.startTime);
+        startTimeField.setText(startTime);
+        TextView startMinField = (TextView) findViewById(R.id.startMin);
+        startMinField.setText(startMin);
 
 
 
-            TextView endTimeField = (TextView) findViewById(R.id.endTime);
-            endTimeField.setText(endTime);
-            TextView endMinField = (TextView) findViewById(R.id.endMin);
-            endMinField.setText(endMin);
+        TextView endTimeField = (TextView) findViewById(R.id.endTime);
+        endTimeField.setText(endTime);
+        TextView endMinField = (TextView) findViewById(R.id.endMin);
+        endMinField.setText(endMin);
 
-            TextView tagField = (TextView) findViewById(R.id.busy);
-            tagField.setText(tag);
+        TextView tagField = (TextView) findViewById(R.id.busy);
+        tagField.setText(tag);
 
     }
 
@@ -119,21 +132,8 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Edit The Event", Toast.LENGTH_SHORT).show();
 
-                Bundle extras = getIntent().getExtras();
-                name = extras.getString("pushName");
-                startTime = extras.getString("pushStartTime");
-                startMin = extras.getString("pushStartMin");
-                endTime = extras.getString("pushEndTime");
-                endMin = extras.getString("pushEndMin");
+                //delete();
 
-                Intent intent = new Intent(EventDetailActivity.this, EventEdit.class);
-                intent.putExtra("pushName", name);
-                intent.putExtra("pushStartTime", startTime);
-                intent.putExtra("pushStartMin", startMin);
-                intent.putExtra("pushEndTime", endTime);
-                intent.putExtra("pushEndMin", endMin);
-
-                startActivity(intent);
             }
         });
     }
@@ -290,4 +290,15 @@ public class EventDetailActivity extends AppCompatActivity {
         @Override
         public void onSearchComplete() {}
     };
+
+    /*
+    public boolean delete() {
+
+        EventDB myDbHelper = new EventDB(getApplicationContext());
+        SQLiteDatabase db = myDbHelper.getReadableDatabase();
+        myDbHelper.deleteinformation(search_name,sqLiteDatabase);
+        Toast.makeText(getApplication(),"Deleted Content!", Toast.LENGTH_LONG).show();
+
+    }
+    */
 }

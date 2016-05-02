@@ -1,3 +1,13 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	This activity handles showing all of the bulbs on the network.
+	It pulls data from the bridge in order to show the correct amount of bulb images,
+	as well as fill the labels with the correct information.
+
+
+ */
 package com.nillawaffer.hue.calendar;
 
 import android.content.Intent;

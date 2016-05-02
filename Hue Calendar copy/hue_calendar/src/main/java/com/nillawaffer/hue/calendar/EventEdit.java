@@ -1,3 +1,11 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	Allows for Event information to be edited and reserved the the database.
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 import android.app.DatePickerDialog;
@@ -22,9 +30,12 @@ public class EventEdit extends AppCompatActivity {
     TextView firstMinuteDisplay;
     Button pickTime;
 
+    String endMinString;
+    String startHourString;
+    String startMinString;
+
     TextView secondHourDisplay;
     TextView secondMinuteDisplay;
-    Button pickTime2;
 
     int pHour;
     int pMinute;
@@ -52,9 +63,13 @@ public class EventEdit extends AppCompatActivity {
     Button addButton;
     Button cancelButton;
 
+    int startHour;
+    int endMin;
+
     String tag = "0";
     String name = "0";
-    int startHour = 0;
+    String finalStartHour = "0";
+    String finalEndHour = "0";
     String startMinute = "0";
     String endHour = "0";
     String endMinute = "0";
@@ -65,27 +80,31 @@ public class EventEdit extends AppCompatActivity {
     String endDay;
     String endYear;
 
+    String finalEndMonth;
+    String finalStartMonth;
+
     public void setTextOnLabels(){
 
         Bundle extras = getIntent().getExtras();
+        name = extras.getString("pushName");
 
-        name = extras.getString("eventName");
-        startHour = extras.getString("firstHourDisplay");
-        startMinute = extras.getString("firstMinuteDisplay");
-        endHour = extras.getString("secondHourDisplay");
-        endMinute = extras.getString("secondMinuteDisplay");
-        startMonth = extras.getString("firstMonthDisplay");
-        startDay = extras.getString("firstDayDisplay");
-        startYear = extras.getString("firstYearDisplay");
-        endMonth = extras.getString("secondMonthDisplay");
-        endDay = extras.getString("secondDayDisplay");
-        endYear = extras.getString("secondYearDisplay");
+        startHourString = extras.getString("pushStartName");
+        startDay = extras.getString("pushStartDay");
+        startMinString = extras.getString("pushStartMin");
+        startYear = extras.getString("pushStartYear");
+        startMonth = extras.getString("pushStartMonth");
+
+        endHour = extras.getString("pushEndHour");
+        endDay = extras.getString("pushEndDay");
+        endMinString = extras.getString("pushEndMin");
+        endYear = extras.getString("pushEndYear");
+        endMonth = extras.getString("pushEndMonth");
 
         TextView nameField = (TextView) findViewById(R.id.textfieldone);
         nameField.setText(name);
 
         firstHourDisplay = (TextView) findViewById(R.id.firstHourDisplay);
-        String time = startHour;
+        String time = finalStartHour;
         firstHourDisplay.setText(time);
 
         firstMinuteDisplay = (TextView) findViewById(R.id.firstMinuteDisplay);
@@ -281,7 +300,7 @@ public class EventEdit extends AppCompatActivity {
             currentHour2 = pHour2;
         }
         endMin = pMinute2;
-        endHour = pHour2;
+        //endHour = pHour2;
         //Set a message for user
         secondHourDisplay.setText(
                 new StringBuilder()
@@ -318,18 +337,18 @@ public class EventEdit extends AppCompatActivity {
             monthh2 = "December";
         }
 
-        endYear = year2;
-        endMonth = month3;
-        endDay = day2;
+        int endYear = year2;
+        int endMonth = month3;
+        int endDay = day2;
 
         secondMonthDisplay.setText(
                 new StringBuilder()
                         .append(monthh2));
-        secondDayDisplay.setText()
-        new StringBuilder()
+        secondDayDisplay.setText(
+            new StringBuilder()
                 .append(day2));
-        secondYearDisplay.setText()
-        new StringBuilder()
+        secondYearDisplay.setText(
+            new StringBuilder()
                 .append(year2));
 
         setTextOnLabels();
@@ -354,7 +373,7 @@ public class EventEdit extends AppCompatActivity {
                     }
                     //Set a message for user
                     pHour = hourOfDay;
-                    finalStartHour = pHour;
+                    int finalStartHour = pHour;
                     pMinute = minute;
 
                     firstHourDisplay.setText(
@@ -403,7 +422,7 @@ public class EventEdit extends AppCompatActivity {
                     month3 = month;
                     day2 = day;
 
-                    finalEndMonth = month3;
+                    int finalEndMonth = month3;
 
                     secondMonthDisplay.setText(
                             new StringBuilder()
@@ -528,7 +547,7 @@ public class EventEdit extends AppCompatActivity {
                     month3 = month;
                     day2 = day;
 
-                    finalStartMonth = month3;
+                    int finalStartMonth = month3;
 
                     firstMonthDisplay.setText(
                             new StringBuilder()
@@ -586,5 +605,4 @@ public class EventEdit extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

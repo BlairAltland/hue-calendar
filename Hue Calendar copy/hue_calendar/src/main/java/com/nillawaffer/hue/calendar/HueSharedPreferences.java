@@ -1,3 +1,11 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	Stores bridge related data such as the username, bridge IP and the last state from the bridge.
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 import android.content.Context;

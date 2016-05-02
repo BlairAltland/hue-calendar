@@ -1,3 +1,11 @@
+/*
+Author: Blair Altland, Bruno Rosa, Nate DeCriscio, Kyle Bargo
+Date: 5/2/2016
+
+	Handles registering the bridge for the first time.
+
+ */
+
 package com.nillawaffer.hue.calendar;
 
 
@@ -15,13 +23,6 @@ import com.philips.lighting.hue.sdk.PHMessageType;
 import com.philips.lighting.hue.sdk.PHSDKListener;
 import com.philips.lighting.model.PHBridge;
 import com.philips.lighting.model.PHHueParsingError;
-
-/**
- * Activity which gives hint for manual pushlink. needs to add <activity
- * android:theme="@android:style/Theme.Dialog" /> in manifest file
- *
- *
- */
 
 public class PHPushLinkActivity extends Activity {
     private ProgressBar pbar;

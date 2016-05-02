@@ -13,26 +13,29 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.BroadcastReceiver;
-import android.content.Intent;
 
 import java.util.Calendar;
 
 public class EventEdit extends AppCompatActivity {
 
-    private TextView displayTime;
-    private Button pickTime;
+    TextView firstHourDisplay;
+    TextView firstMinuteDisplay;
+    Button pickTime;
 
-    private int pHour;
-    private int pMinute;
+    TextView secondHourDisplay;
+    TextView secondMinuteDisplay;
+    Button pickTime2;
+
+    int pHour;
+    int pMinute;
+    int startMin;
     /** This integer will uniquely define the dialog to be used for displaying time picker.*/
     static final int TIME_DIALOG_ID = 0;
 
-    private TextView displayDate;
-    private Button pickDate;
+    TextView firstMonthDisplay;
+    TextView firstDayDisplay;
+    TextView firstYearDisplay;
+    Button pickDate;
 
     private int year2;
     private int month3;
@@ -41,67 +44,88 @@ public class EventEdit extends AppCompatActivity {
     static final int DATE_DIALOG_ID = 2;
     static final int DATE_DIALOG_ID2 = 3;
 
-    private TextView displayDate2;
-    private Button pickDate2;
+    TextView secondMonthDisplay;
+    TextView secondDayDisplay;
+    TextView secondYearDisplay;
+    Button pickDate2;
 
     Button addButton;
     Button cancelButton;
 
     String tag = "0";
     String name = "0";
-    String startTime = "0";
-    String startMin= "0";
-    String endTime = "0";
-    String endMin = "0";
+    int startHour = 0;
+    String startMinute = "0";
+    String endHour = "0";
+    String endMinute = "0";
+    String startMonth;
+    String startDay;
+    String startYear;
+    String endMonth;
+    String endDay;
+    String endYear;
 
     public void setTextOnLabels(){
 
         Bundle extras = getIntent().getExtras();
 
-        name = extras.getString("pushName");
-        startTime = extras.getString("pushStartTime");
-        startMin = extras.getString("pushStartMin");
-        endTime = extras.getString("pushEndTime");
-        endMin = extras.getString("pushEndMin");
+        name = extras.getString("eventName");
+        startHour = extras.getString("firstHourDisplay");
+        startMinute = extras.getString("firstMinuteDisplay");
+        endHour = extras.getString("secondHourDisplay");
+        endMinute = extras.getString("secondMinuteDisplay");
+        startMonth = extras.getString("firstMonthDisplay");
+        startDay = extras.getString("firstDayDisplay");
+        startYear = extras.getString("firstYearDisplay");
+        endMonth = extras.getString("secondMonthDisplay");
+        endDay = extras.getString("secondDayDisplay");
+        endYear = extras.getString("secondYearDisplay");
 
-            TextView nameField = (TextView) findViewById(R.id.textfieldone);
-            nameField.setText(name);
-            TextView timeDisplay = (TextView) findViewById(R.id.timeDisplay);
-            String time = startTime + ":" + startMin;
-            timeDisplay.setText(time);
+        TextView nameField = (TextView) findViewById(R.id.textfieldone);
+        nameField.setText(name);
 
-            TextView timeDisplay2 = (TextView) findViewById(R.id.secondMonthDisplay);
-            String timeEndString  = endTime + ":" + endMin;
-            timeDisplay2.setText(timeEndString);
+        firstHourDisplay = (TextView) findViewById(R.id.firstHourDisplay);
+        String time = startHour;
+        firstHourDisplay.setText(time);
+
+        firstMinuteDisplay = (TextView) findViewById(R.id.firstMinuteDisplay);
+        String time2 = startMinute;
+        firstMinuteDisplay.setText(time2);
+
+        secondHourDisplay = (TextView) findViewById(R.id.secondHourDisplay);
+        String time3 = endHour;
+        secondHourDisplay.setText(time3);
+
+        secondMinuteDisplay = (TextView) findViewById(R.id.secondMinuteDisplay);
+        String time4 = endMinute;
+        secondMinuteDisplay.setText(time4);
+
+        firstMonthDisplay = (TextView) findViewById(R.id.firstMonthDisplay);
+        String date  = startMonth;
+        firstMonthDisplay.setText(date);
+
+        firstDayDisplay = (TextView) findViewById(R.id.firstDayDisplay);
+        String date2  = startDay;
+        firstDayDisplay.setText(date2);
+
+        firstYearDisplay = (TextView) findViewById(R.id.firstYearDisplay);
+        String date3  = startYear;
+        firstYearDisplay.setText(date3);
+
+        secondMonthDisplay = (TextView) findViewById(R.id.secondMonthDisplay);
+        String date4  = endMonth;
+        secondMonthDisplay.setText(date4);
+
+        secondDayDisplay = (TextView) findViewById(R.id.secondDayDisplay);
+        String date5  = endDay;
+        secondDayDisplay.setText(date5);
+
+        secondYearDisplay = (TextView) findViewById(R.id.secondYearDisplay);
+        String date6  = endYear;
+        secondYearDisplay.setText(date6);
 
     }
-/*
-    public void startNewAlarm(){
 
-        AlarmManager alarmMgr;
-        // Only used for setRepeating() and setInexactRepeating
-        PendingIntent alarmIntent;
-        alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-
-        // Set the alarm to start at the time of the event
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, startTime);
-        calendar.set(Calendar.MINUTE, startMin);
-
-        // With setInexactRepeating(), this will determine the recurrence. We need to sync this up
-        // with what the user selects (HARDCODED IN AT ONE DAY)
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, alarmIntent);
-
-        // setRepeating() lets you specify a precise custom interval
-        //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-        //        1000 * 60 * 20, alarmIntent);
-
-    }
-*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,10 +137,13 @@ public class EventEdit extends AppCompatActivity {
         addListenerOnButton();
 
         /** Capture our View elements */
-        displayTime = (TextView) findViewById(R.id.timeDisplay);
+        firstHourDisplay = (TextView) findViewById(R.id.firstHourDisplay);
+        firstMinuteDisplay = (TextView) findViewById(R.id.firstMinuteDisplay);
         pickTime = (Button) findViewById(R.id.pickTime);
 
-        displayDate = (TextView) findViewById(R.id.firstYearDisplay);
+        firstMonthDisplay = (TextView) findViewById(R.id.firstMonthDisplay);
+        firstDayDisplay = (TextView) findViewById(R.id.firstDayDisplay);
+        firstYearDisplay = (TextView) findViewById(R.id.firstYearDisplay);
         pickDate = (Button) findViewById(R.id.pickDate);
 
         /** Listener for click event of the button */
@@ -155,11 +182,16 @@ public class EventEdit extends AppCompatActivity {
         } else {
             currentHour = pHour;
         }
+        startMin = pMinute;
+        startHour = pHour;
+
         //Set a message for user
-        displayTime.setText(
+        firstHourDisplay.setText(
                 new StringBuilder()
-                        .append(pad(currentHour)).append(":")
-                        .append(pad(pMinute)).append(" ").append(aMpM));
+                        .append(pad(currentHour)));
+        firstMinuteDisplay.setText(
+                new StringBuilder()
+                        .append(pad(pMinute)));
 
         /** Display the current time in the TextView */
         String month2 = " ";
@@ -189,17 +221,25 @@ public class EventEdit extends AppCompatActivity {
             month2 = "December";
         }
 
-        displayDate.setText(
+        firstMonthDisplay.setText(
                 new StringBuilder()
-                        .append(month2).append(" ")
-                        .append(day).append(", ").append(year));
+                        .append(month2));
+        firstDayDisplay.setText(
+                new StringBuilder()
+                        .append(day));
+        firstYearDisplay.setText(
+                new StringBuilder()
+                        .append(year));
 
         /** Capture our View elements */
-        displayTime2 = (TextView) findViewById(R.id.secondHourDisplay);
+        secondHourDisplay = (TextView) findViewById(R.id.secondHourDisplay);
+        secondMinuteDisplay = (TextView) findViewById(R.id.secondMinuteDisplay);
         pickTime2 = (Button) findViewById(R.id.pickTime2);
 
         /** Capture our View elements */
-        displayDate2 = (TextView) findViewById(R.id.secondYearDisplay);
+        secondMonthDisplay = (TextView) findViewById(R.id.secondMonthDisplay);
+        secondDayDisplay = (TextView) findViewById(R.id.secondDayDisplay);
+        secondYearDisplay = (TextView) findViewById(R.id.secondYearDisplay);
         pickDate2 = (Button) findViewById(R.id.pickDate2);
 
         /** Listener for click event of the button */
@@ -240,11 +280,15 @@ public class EventEdit extends AppCompatActivity {
         } else {
             currentHour2 = pHour2;
         }
+        endMin = pMinute2;
+        endHour = pHour2;
         //Set a message for user
-        displayTime2.setText(
+        secondHourDisplay.setText(
                 new StringBuilder()
-                        .append(pad(currentHour2)).append(":")
-                        .append(pad(pMinute2)).append(" ").append(aMpM2));
+                        .append(pad(currentHour2)));
+        secondMinuteDisplay.setText(
+                new StringBuilder()
+                        .append(pad(pMinute2)));
 
         /** Display the current date in the TextView */
         String monthh2 = " ";
@@ -274,10 +318,19 @@ public class EventEdit extends AppCompatActivity {
             monthh2 = "December";
         }
 
-        displayDate2.setText(
+        endYear = year2;
+        endMonth = month3;
+        endDay = day2;
+
+        secondMonthDisplay.setText(
                 new StringBuilder()
-                        .append(monthh2).append(" ")
-                        .append(day2).append(", ").append(year2));
+                        .append(monthh2));
+        secondDayDisplay.setText()
+        new StringBuilder()
+                .append(day2));
+        secondYearDisplay.setText()
+        new StringBuilder()
+                .append(year2));
 
         setTextOnLabels();
 
@@ -301,11 +354,15 @@ public class EventEdit extends AppCompatActivity {
                     }
                     //Set a message for user
                     pHour = hourOfDay;
+                    finalStartHour = pHour;
                     pMinute = minute;
-                    displayTime.setText(
+
+                    firstHourDisplay.setText(
                             new StringBuilder()
-                                    .append(pad(currentHour)).append(":")
-                                    .append(pad(pMinute)).append(" ").append(aMpM));
+                                    .append(pad(currentHour)));
+                    firstMinuteDisplay.setText(
+                            new StringBuilder()
+                                    .append(pad(pMinute)));
                 }
             };
 
@@ -345,10 +402,18 @@ public class EventEdit extends AppCompatActivity {
                     year2 = year;
                     month3 = month;
                     day2 = day;
-                    displayDate2.setText(
+
+                    finalEndMonth = month3;
+
+                    secondMonthDisplay.setText(
                             new StringBuilder()
-                                    .append(month2).append(" ")
-                                    .append(day).append(", ").append(year));
+                                    .append(month2));
+                    secondDayDisplay.setText(
+                            new StringBuilder()
+                                    .append(day));
+                    secondYearDisplay.setText(
+                            new StringBuilder()
+                                    .append(year));
 
 
                 }
@@ -416,10 +481,13 @@ public class EventEdit extends AppCompatActivity {
                     //Set a message for user
                     pHour2 = hourOfDay;
                     pMinute2 = minute;
-                    displayTime2.setText(
+
+                    secondHourDisplay.setText(
                             new StringBuilder()
-                                    .append(pad(currentHour)).append(":")
-                                    .append(pad(pMinute2)).append(" ").append(aMpM));
+                                    .append(pad(currentHour)));
+                    secondMinuteDisplay.setText(
+                            new StringBuilder()
+                                    .append(pad(pMinute2)));
                 }
             };
 
@@ -459,12 +527,18 @@ public class EventEdit extends AppCompatActivity {
                     year2 = year;
                     month3 = month;
                     day2 = day;
-                    displayDate.setText(
+
+                    finalStartMonth = month3;
+
+                    firstMonthDisplay.setText(
                             new StringBuilder()
-                                    .append(month2).append(" ")
-                                    .append(day).append(", ").append(year));
-
-
+                                    .append(month2));
+                    firstDayDisplay.setText(
+                            new StringBuilder()
+                                    .append(day));
+                    firstYearDisplay.setText(
+                            new StringBuilder()
+                                    .append(year));
                 }
             };
 
@@ -491,7 +565,6 @@ public class EventEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Event Added", Toast.LENGTH_SHORT).show();
-                //startNewAlarm();
                 finish();
             }
         });

@@ -73,46 +73,62 @@ public class BasicActivity extends BaseActivity {
 
             //cursor.moveToNext();
 
-        if(cursor.moveToNext()) {
+        /*
+        String[] names = cursor.getColumnNames();
+
+        StringBuilder sb = new StringBuilder();
+
+        for(String name: names) {
+
+            sb.append(name);
+            sb.append(", ");
+        }
+
+        Log.w(TAG, sb.toString());
+        */
+         if(cursor.moveToNext()){
 
             //Log.w(TAG, "IM IN HERE");
-
-            Calendar startTime = Calendar.getInstance();
-            startTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_DAY))));
-            startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_HOUR))));
-            startTime.set(Calendar.MINUTE, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE))));
-            startTime.set(Calendar.MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_MONTH))));
-            startTime.set(Calendar.YEAR, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_YEAR))));
-
-
-            // set end time
-            Calendar endTime = (Calendar) startTime.clone();
-            endTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_DAY))));
-            endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_HOUR))));
-            endTime.set(Calendar.MINUTE, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE))));
-            endTime.set(Calendar.MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_MONTH))));
-            endTime.set(Calendar.YEAR, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_YEAR))));
+                 Calendar startTime = Calendar.getInstance();
+                 startTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_DAY))));
+                 startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_HOUR))));
+                 startTime.set(Calendar.MINUTE, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE))));
+                 startTime.set(Calendar.MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_MONTH))));
+                 //startTime.set(Calendar.MONTH, 4);
+                 startTime.set(Calendar.YEAR, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_YEAR))));
 
 
-            // set event name
-            WeekViewEvent event = new WeekViewEvent(1, cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_NAME)), startTime, endTime);
-            event.setColor(getResources().getColor(setRandomColor()));
-            events.add(event);
-            Log.w(TAG, "ADDED");
+                 // set end time
+                 Calendar endTime = (Calendar) startTime.clone();
+                 endTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_DAY))));
+                 endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_HOUR))));
+                 endTime.set(Calendar.MINUTE, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE))));
+                 endTime.set(Calendar.MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MONTH))));
+                 //endTime.set(Calendar.MONTH, 4);
+                 endTime.set(Calendar.YEAR, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_YEAR))));
+
+
+                 // set event name
+                 WeekViewEvent event = new WeekViewEvent(1, cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_NAME)), startTime, endTime);
+                 event.setColor(getResources().getColor(setRandomColor()));
+                 events.add(event);
+                 Log.w(TAG, "ADDED");
         }
+
 
         cursor.close();
         db.close();
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
         for (WeekViewEvent event: events){
-            sb.append(event.getName());
-            sb.append(event.getStartTime());
-            sb.append(event.getEndTime());
+            builder.append(event.getName());
+            builder.append(event.getStartTime());
+            builder.append(event.getEndTime());
         }
 
-        Log.w(TAG, sb.toString());
+        Log.w(TAG, builder.toString());
+
         return events;
     }
 

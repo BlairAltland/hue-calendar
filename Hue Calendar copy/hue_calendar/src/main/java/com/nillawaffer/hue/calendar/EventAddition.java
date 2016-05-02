@@ -60,8 +60,8 @@ public class EventAddition extends AppCompatActivity {
     private int endMonth;
     private int endDay;
 
-    int finalStartMonth;
-    int finalEndMonth;
+    int finalStartMonth = 4;
+    int finalEndMonth = 4;
 
     int finalStartHour;
     int finalEndHour;
@@ -215,6 +215,10 @@ public class EventAddition extends AppCompatActivity {
             month2 = "December";
         }
 
+
+        //finalStartMonth = month;
+        Log.w(TAG, "Month = ");
+        Log.w(TAG, Integer.toString(month));
         //startYear = year;
         //startMonth = month;
         //startDay = day;
@@ -316,6 +320,7 @@ public class EventAddition extends AppCompatActivity {
             monthh2 = "December";
         }
 
+        //finalEndMonth = month3;
 
         endYear = year2;
         endMonth = month3;
@@ -352,7 +357,7 @@ public class EventAddition extends AppCompatActivity {
                     }
                     //Set a message for user
                     pHour = hourOfDay;
-                    finalStartHour = pHour;
+                    //finalStartHour = pHour;
                     pMinute = minute;
                     firstHourDisplay.setText(
                             new StringBuilder()
@@ -367,6 +372,7 @@ public class EventAddition extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener2 =
             new DatePickerDialog.OnDateSetListener() {
                 public void onDateSet(DatePicker view, int year, int month, int day) {
+
 
                     String month2 = " ";
                     if (month == 0) {
@@ -397,10 +403,8 @@ public class EventAddition extends AppCompatActivity {
 
                     //Set a message for user
                     year2 = year;
-                    month3 = month;
                     day2 = day;
 
-                    finalEndMonth = month3;
 
                     secondMonthDisplay.setText(
                             new StringBuilder()
@@ -411,6 +415,8 @@ public class EventAddition extends AppCompatActivity {
                     secondYearDisplay.setText(
                             new StringBuilder()
                                     .append(year));
+                    //onDateSet(R.id., year2, month3, day2);
+                    //onDateSet(R.);
 
                 }
             };
@@ -468,7 +474,7 @@ public class EventAddition extends AppCompatActivity {
                     }
                     //Set a message for user
                     pHour2 = hourOfDay;
-                    finalEndHour = pHour2;
+                    //finalEndHour = pHour2;
                     pMinute2 = minute;
 
                     secondHourDisplay.setText(
@@ -514,10 +520,8 @@ public class EventAddition extends AppCompatActivity {
 
                     //Set a message for user
                     year2 = year;
-                    month3 = month;
                     day2 = day;
 
-                    finalStartMonth = month3;
 
                     firstMonthDisplay.setText(
                             new StringBuilder()
@@ -563,14 +567,14 @@ public class EventAddition extends AppCompatActivity {
 
                 values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, firstMinuteDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, Integer.toString(finalStartHour));
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, firstHourDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, secondMinuteDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, Integer.toString(finalEndHour));
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, secondHourDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, firstYearDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, finalStartMonth);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, Integer.toString(finalStartMonth));
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, firstDayDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_YEAR, secondYearDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, finalEndMonth);
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, Integer.toString(finalEndMonth));
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, secondDayDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, tagName.getText().toString());
 

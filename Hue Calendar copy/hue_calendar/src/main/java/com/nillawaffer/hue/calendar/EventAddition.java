@@ -63,6 +63,9 @@ public class EventAddition extends AppCompatActivity {
     int finalStartMonth;
     int finalEndMonth;
 
+    int finalStartHour;
+    int finalEndHour;
+
 
     EditText eventName;
     EditText tagName;
@@ -96,8 +99,8 @@ public class EventAddition extends AppCompatActivity {
     TextView secondMinuteDisplay;
     Button pickTime2;
 
-    private int pHour2;
-    private int pMinute2;
+    int pHour2;
+    int pMinute2;
     /** This integer will uniquely define the dialog to be used for displaying time picker.*/
     static final int TIME_DIALOG_ID2 = 1;
 
@@ -349,6 +352,7 @@ public class EventAddition extends AppCompatActivity {
                     }
                     //Set a message for user
                     pHour = hourOfDay;
+                    finalStartHour = pHour;
                     pMinute = minute;
                     firstHourDisplay.setText(
                             new StringBuilder()
@@ -464,6 +468,7 @@ public class EventAddition extends AppCompatActivity {
                     }
                     //Set a message for user
                     pHour2 = hourOfDay;
+                    finalEndHour = pHour2;
                     pMinute2 = minute;
 
                     secondHourDisplay.setText(
@@ -556,12 +561,11 @@ public class EventAddition extends AppCompatActivity {
                 SQLiteDatabase db = myDbHelper.getReadableDatabase();
                 ContentValues values = new ContentValues();
 
-
                 values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, eventName.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, firstMinuteDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, firstHourDisplay.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, Integer.toString(finalStartHour));
                 values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, secondMinuteDisplay.getText().toString());
-                values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, secondHourDisplay.getText().toString());
+                values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, Integer.toString(finalEndHour));
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, firstYearDisplay.getText().toString());
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, finalStartMonth);
                 values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, firstDayDisplay.getText().toString());

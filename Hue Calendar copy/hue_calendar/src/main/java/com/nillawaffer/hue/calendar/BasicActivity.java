@@ -7,9 +7,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
+import android.nfc.Tag;
 import android.util.Log;
 
 
@@ -34,25 +37,11 @@ public class BasicActivity extends BaseActivity {
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
+        //addFillerEvent();
+
         EventDB dbHelper = new EventDB(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String[] projection = {
-        Events.SubmitEvent.COLUMN_EVENT_NAME,
-        Events.SubmitEvent.COLUMN_EVENT_START_MINUTE,
-        Events.SubmitEvent.COLUMN_EVENT_START_HOUR,
-        Events.SubmitEvent.COLUMN_EVENT_END_MINUTE,
-        Events.SubmitEvent.COLUMN_EVENT_END_HOUR,
-        Events.SubmitEvent.COLUMN_EVENT_START_YEAR,
-        Events.SubmitEvent.COLUMN_EVENT_START_MONTH,
-        Events.SubmitEvent.COLUMN_EVENT_START_DAY,
-        Events.SubmitEvent.COLUMN_EVENT_END_YEAR,
-        Events.SubmitEvent.COLUMN_EVENT_END_MONTH,
-        Events.SubmitEvent.COLUMN_EVENT_END_DAY,
-        Events.SubmitEvent.COLUMN_EVENT_TAGS
-        };
-
-        /*
         String[] bind = {
         Events.SubmitEvent._ID,
         Events.SubmitEvent.COLUMN_EVENT_NAME,
@@ -68,14 +57,9 @@ public class BasicActivity extends BaseActivity {
         Events.SubmitEvent.COLUMN_EVENT_END_DAY,
         Events.SubmitEvent.COLUMN_EVENT_TAGS
         };
-        */
-        //now going to call method to return cursor
 
-
-
-        final Cursor cursor = db.query(
-                Events.SubmitEvent.TABLE_NAME, //table to query
-                projection,
+        final Cursor cursor = db.query(Events.SubmitEvent.TABLE_NAME, //table to query
+                bind,
                 null,
                 null,
                 null,
@@ -86,6 +70,12 @@ public class BasicActivity extends BaseActivity {
         //while (cursor.moveToNext()) {
             //
             // set start time
+
+            //cursor.moveToNext();
+
+        if(cursor.moveToNext()) {
+
+            //Log.w(TAG, "IM IN HERE");
 
             Calendar startTime = Calendar.getInstance();
             startTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_DAY))));
@@ -100,7 +90,7 @@ public class BasicActivity extends BaseActivity {
             endTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_DAY))));
             endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_HOUR))));
             endTime.set(Calendar.MINUTE, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE))));
-            endTime.set(Calendar.MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_MONTH))));
+            endTime.set(Calendar.MONTH, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_START_MONTH))));
             endTime.set(Calendar.YEAR, Integer.parseInt(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_END_YEAR))));
 
 
@@ -108,37 +98,25 @@ public class BasicActivity extends BaseActivity {
             WeekViewEvent event = new WeekViewEvent(1, cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_NAME)), startTime, endTime);
             event.setColor(getResources().getColor(setRandomColor()));
             events.add(event);
-        //}
+            Log.w(TAG, "ADDED");
+        }
 
-/*
-        Calendar startTime = Calendar.getInstance();
+        cursor.close();
+        db.close();
 
-        //Set Start Time
-        startTime.set(Calendar.DAY_OF_MONTH, 2);
-        startTime.set(Calendar.HOUR_OF_DAY, 12);
-        startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, newMonth - 1);
-        startTime.set(Calendar.YEAR, newYear);
+        StringBuilder sb = new StringBuilder();
 
-        //Set End Time
-        Calendar endTime = (Calendar) startTime.clone();
-        endTime.add(Calendar.HOUR, 1);
-        endTime.set(Calendar.MONTH, newMonth - 1);
+        for (WeekViewEvent event: events){
+            sb.append(event.getName());
+            sb.append(event.getStartTime());
+            sb.append(event.getEndTime());
+        }
 
-        //Configure Event                           Name    Start      End
-        WeekViewEvent event = new WeekViewEvent(1, "Class", startTime, endTime);
-        //Set Color
-              event.setColor(getResources().getColor(R.color.event_color_01));
-        //Create Event
-        events.add(event);
-
-        //monday
-
-        int month = 4;
-        //Return all events
-        */
+        Log.w(TAG, sb.toString());
         return events;
     }
+
+
 
     public int setRandomColor(){
 
@@ -187,6 +165,30 @@ public class BasicActivity extends BaseActivity {
         }
 
         return returnColor;
+    }
+
+    public void addFillerEvent() {
+
+        EventDB myDbHelper = new EventDB(getApplicationContext());
+        SQLiteDatabase db = myDbHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+
+
+        values.put(Events.SubmitEvent.COLUMN_EVENT_NAME, "");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_START_MINUTE, "0");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_START_HOUR, "1");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_END_MINUTE, "0");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_END_HOUR, "3");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_START_YEAR, "1900");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_START_MONTH, "2");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_START_DAY, "1");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_END_YEAR, "1900");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_END_MONTH, "2");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_END_DAY, "3");
+        values.put(Events.SubmitEvent.COLUMN_EVENT_TAGS, "");
+
+        // insert the values into the database
+        long newRowId = db.insert(Events.SubmitEvent.TABLE_NAME, null, values);
     }
 
 }

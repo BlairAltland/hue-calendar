@@ -75,10 +75,11 @@ public class EventDetailActivity extends AppCompatActivity {
 
         //Create the labels
         setLabelsBlank();
+        changeDataLabels();
         //setLabelText();
-        //setLabelsFromBridge();
+        setLabelsFromBridge();
 
-        //setImageButtonContent();
+        setImageButtonContent();
 
         addListenerOnButton();
     }
@@ -313,7 +314,32 @@ public class EventDetailActivity extends AppCompatActivity {
     public void changeDataLabels(){
 
         //if the current hour is <12, subtract 12
-        
+        TextView startTimeField = (TextView) findViewById(R.id.startTime);
+        TextView startAMPMField = (TextView) findViewById(R.id.startAMPM);
+        int startHour = Integer.parseInt(startTimeField.getText().toString());
+        startAMPMField.setText("AM");
+        if(startHour > 12) {
+
+            int finalStartHour = startHour - 12;
+
+            startTimeField.setText(String.valueOf(finalStartHour));
+            startAMPMField.setText("PM");
+        }
+
+        //if the current hour is <12, subtract 12
+        TextView endAMPMField = (TextView) findViewById(R.id.endAMPM);
+        TextView endTimeField = (TextView) findViewById(R.id.endTime);
+        int endHour = Integer.parseInt(endTimeField.getText().toString());
+        endAMPMField.setText("AM");
+        if(endHour > 12) {
+
+            int finalEndHour = endHour - 12;
+
+            endTimeField.setText(String.valueOf(finalEndHour));
+            endAMPMField.setText("PM");
+
+        }
+
     }
 
 }

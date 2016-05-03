@@ -81,6 +81,7 @@ public class EventAddition extends AppCompatActivity {
     EditText tagName;
     TextView firstHourDisplay;
     TextView firstMinuteDisplay;
+    TextView firstaMpMDisplay;
     Button pickTime;
 
     int pHour;
@@ -107,6 +108,7 @@ public class EventAddition extends AppCompatActivity {
     TextView secondMonthDisplay;
     TextView secondDayDisplay;
     TextView secondYearDisplay;
+    TextView secondaMpMDisplay;
     Button pickDate2;
 
     TextView secondHourDisplay;
@@ -152,6 +154,7 @@ public class EventAddition extends AppCompatActivity {
         /** Capture our View elements */
         firstHourDisplay = (TextView) findViewById(R.id.firstHourDisplay);
         firstMinuteDisplay = (TextView) findViewById(R.id.firstMinuteDisplay);
+        firstaMpMDisplay = (TextView) findViewById(R.id.firstaMpMDisplay);
         pickTime = (Button) findViewById(R.id.pickTime);
 
         firstMonthDisplay = (TextView) findViewById(R.id.firstMonthDisplay);
@@ -200,6 +203,7 @@ public class EventAddition extends AppCompatActivity {
         //Set a message for user
         firstHourDisplay.setText(new StringBuilder().append(pad(currentHour)));
         firstMinuteDisplay.setText(new StringBuilder().append(pad(pMinute)));
+        firstaMpMDisplay.setText(new StringBuilder().append(aMpM));
 
         /** Display the current time in the TextView */
         String month2 = " ";
@@ -250,6 +254,7 @@ public class EventAddition extends AppCompatActivity {
         /** Capture our View elements */
         secondHourDisplay = (TextView) findViewById(R.id.secondHourDisplay);
         secondMinuteDisplay = (TextView) findViewById(R.id.secondMinuteDisplay);
+        secondaMpMDisplay = (TextView) findViewById(R.id.secondaMpMDisplay);
         pickTime2 = (Button) findViewById(R.id.pickTime2);
 
         /** Capture our View elements */
@@ -305,6 +310,9 @@ public class EventAddition extends AppCompatActivity {
         secondMinuteDisplay.setText(
                 new StringBuilder()
                         .append(pad(pMinute2)));
+        secondaMpMDisplay.setText(
+                new StringBuilder()
+                        .append(aMpM2));
 
         /** Display the current date in the TextView */
         String monthh2 = " ";
@@ -379,6 +387,9 @@ public class EventAddition extends AppCompatActivity {
                     firstMinuteDisplay.setText(
                             new StringBuilder()
                                     .append(pad(pMinute)));
+                    firstaMpMDisplay.setText(
+                            new StringBuilder()
+                                    .append(aMpM));
                 }
             };
 
@@ -497,6 +508,9 @@ public class EventAddition extends AppCompatActivity {
                     secondMinuteDisplay.setText(
                             new StringBuilder()
                                     .append(pad(pMinute2)));
+                    secondaMpMDisplay.setText(
+                            new StringBuilder()
+                                    .append(aMpM));
                 }
             };
 

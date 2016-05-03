@@ -126,7 +126,8 @@ public class BasicActivity extends BaseActivity {
                  // set event name
                  WeekViewEvent event = new WeekViewEvent(1, cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_NAME)), startTime, endTime);
                  event.setColor(getResources().getColor(setRandomColor()));
-                 event.setTag((cursor.getString(cursor.getColumnIndex(Events.SubmitEvent._ID))));
+                 event.setID((cursor.getString(cursor.getColumnIndex(Events.SubmitEvent._ID))));
+                 event.setTag(cursor.getString(cursor.getColumnIndex(Events.SubmitEvent.COLUMN_EVENT_TAGS)));
                  events.add(event);
                  Log.w(TAG, "ADDED");
 

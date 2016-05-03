@@ -55,6 +55,10 @@
             android:name=".PHEditActivity"
             android:label="@string/event_detail"></activity>
 
+        <activity
+            android:name=".PHStartActivity"
+            android:label="@string/event_detail"></activity>
+
 
     </application>
 

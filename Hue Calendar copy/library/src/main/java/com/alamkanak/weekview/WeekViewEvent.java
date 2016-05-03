@@ -18,6 +18,7 @@ public class WeekViewEvent {
     private String mLocation;
     private int mColor;
     private String mTag;
+    private String mID;
     private boolean mAllDay;
 
     public WeekViewEvent(){
@@ -149,6 +150,14 @@ public class WeekViewEvent {
         this.mTag = tag;
     }
 
+    public String getID() {
+        return mID;
+    }
+
+    public void setID(String id) {
+        this.mID = id;
+    }
+
     public boolean isAllDay() {
         return mAllDay;
     }
@@ -194,6 +203,7 @@ public class WeekViewEvent {
             WeekViewEvent event1 = new WeekViewEvent(this.getId(), this.getName(), this.getLocation(), this.getStartTime(), endTime, this.isAllDay());
             event1.setColor(this.getColor());
             event1.setTag(this.getTag());
+            event1.setID(this.getID());
             events.add(event1);
 
             // Add other days.
@@ -209,6 +219,7 @@ public class WeekViewEvent {
                 WeekViewEvent eventMore = new WeekViewEvent(this.getId(), this.getName(), null, overDay, endOfOverDay, this.isAllDay());
                 eventMore.setColor(this.getColor());
                 eventMore.setTag(this.getTag());
+                eventMore.setID(this.getID());
                 events.add(eventMore);
 
                 // Add next day.
@@ -222,6 +233,7 @@ public class WeekViewEvent {
             WeekViewEvent event2 = new WeekViewEvent(this.getId(), this.getName(), this.getLocation(), startTime, this.getEndTime(), this.isAllDay());
             event2.setColor(this.getColor());
             event2.setTag(this.getTag());
+            event2.setID(this.getID());
             events.add(event2);
         }
         else{

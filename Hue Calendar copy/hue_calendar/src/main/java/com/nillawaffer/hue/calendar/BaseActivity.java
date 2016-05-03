@@ -87,7 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BaseActivity.this, PHHomeActivity.class);
+                Intent intent = new Intent(BaseActivity.this, EventAddition.class);
                 startActivity(intent);
             }
         });
@@ -156,7 +156,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 return true;
 
             case R.id.PHbulbActivity:
-                Intent intent = new Intent(this, PHBulbActivity.class);
+                Intent intent = new Intent(this, LightBulbs.class);
                 startActivity(intent);
                 return true;
         }
@@ -207,6 +207,8 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         startTime = String.valueOf(event.getStartTime().getTime().getHours());
         endTime = String.valueOf(event.getEndTime().getTime().getHours());
 
+        String id = event.getID();
+
         int startMin = event.getStartTime().getTime().getMinutes();
 
         String tag = event.getTag();
@@ -238,6 +240,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
         intent.putExtra("pushEndTime", endTime);
         intent.putExtra("pushEndMin", endMinString);
+        intent.putExtra("pushID", id);
         intent.putExtra("pushTag", tag);
         startActivity(intent);
     }

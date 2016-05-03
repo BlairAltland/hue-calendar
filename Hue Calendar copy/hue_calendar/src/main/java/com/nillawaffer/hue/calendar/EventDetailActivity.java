@@ -38,6 +38,7 @@ public class EventDetailActivity extends AppCompatActivity {
     //Instantiate buttons and strings for later usage
     Button doneButton;
     String tag = "0";
+    String id = "0";
     String name = "0";
     String startTime = "0";
     String startMin= "0";
@@ -95,6 +96,7 @@ public class EventDetailActivity extends AppCompatActivity {
         endMin = extras.getString("pushEndMin");
 
         tag = extras.getString("pushTag");
+        id = extras.getString("pushID");
 
         TextView nameField = (TextView) findViewById(R.id.name);
         nameField.setText(name);
@@ -130,10 +132,13 @@ public class EventDetailActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Edit The Event", Toast.LENGTH_SHORT).show();
 
-                //delete();
+                delete(Integer.parseInt(id));
 
+                Intent intent = new Intent(EventDetailActivity.this, BasicActivity.class);
+                startActivity(intent);
+
+                Toast.makeText(getApplicationContext(), "Event Deleted", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -291,14 +296,24 @@ public class EventDetailActivity extends AppCompatActivity {
         public void onSearchComplete() {}
     };
 
-    /*
-    public boolean delete() {
+    public void delete(int id) {
 
         EventDB myDbHelper = new EventDB(getApplicationContext());
         SQLiteDatabase db = myDbHelper.getReadableDatabase();
+        /*
         myDbHelper.deleteinformation(search_name,sqLiteDatabase);
         Toast.makeText(getApplication(),"Deleted Content!", Toast.LENGTH_LONG).show();
+        */
+
+        db.execSQL("DELETE FROM EVENTS WHERE _ID = " + id);
+        db.close();
 
     }
-    */
+
+    public void changeDataLabels(){
+
+        //if the current hour is <12, subtract 12
+        
+    }
+
 }

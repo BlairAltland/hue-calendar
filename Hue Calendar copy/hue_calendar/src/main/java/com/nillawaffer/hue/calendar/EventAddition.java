@@ -93,6 +93,10 @@ public class EventAddition extends AppCompatActivity {
     TextView firstYearDisplay;
     Button pickDate;
 
+    private int year;
+    private int month;
+    private int day;
+
     private int year2;
     private int month3;
     private int day2;
@@ -174,9 +178,9 @@ public class EventAddition extends AppCompatActivity {
 
         /** Get the current date */
         final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
 
         /** Display the current time in the TextView */
         String aMpM = "AM";
@@ -455,11 +459,11 @@ public class EventAddition extends AppCompatActivity {
 
             case DATE_DIALOG_ID:
                 return new DatePickerDialog(this,
-                        mDateSetListener, month3, day2, year2);
+                        mDateSetListener, year, month, day);
 
             case DATE_DIALOG_ID2:
                 return new DatePickerDialog(this,
-                        mDateSetListener2, month3, day2, year2);
+                        mDateSetListener2, year, month, day);
         }
         return null;
     }

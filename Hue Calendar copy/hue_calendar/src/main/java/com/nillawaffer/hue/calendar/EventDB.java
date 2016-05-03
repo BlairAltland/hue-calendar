@@ -52,6 +52,8 @@ public class EventDB extends SQLiteOpenHelper{
     // deleting a table
     private static final String SQL_DELETE = "DROP TABLE IF EXISTS " + Events.SubmitEvent.TABLE_NAME;
 
+    private static final String SQL_EVENT_DELETE = "DELETE * FROM EVENTS WHERE ID = " + Events.SubmitEvent._ID;
+
     public EventDB (Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -70,9 +72,6 @@ public class EventDB extends SQLiteOpenHelper{
         db.execSQL(SQL_DELETE);
         onCreate(db);
     }
-
-
-
 }
 
 

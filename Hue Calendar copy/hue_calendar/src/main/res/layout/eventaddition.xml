@@ -251,7 +251,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/line5"
         android:hint="Tag"
-        android:text="@string/tagField"
         android:layout_marginStart="11dp"
         />
 

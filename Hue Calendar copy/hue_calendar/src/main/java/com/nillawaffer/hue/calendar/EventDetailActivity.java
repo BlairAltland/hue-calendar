@@ -92,9 +92,19 @@ public class EventDetailActivity extends AppCompatActivity {
         name = extras.getString("pushName");
         startTime = extras.getString("pushStartTime");
         startMin = extras.getString("pushStartMin");
+        if (Integer.parseInt(startMin) >= 10){
+            startMin = String.valueOf(startMin);
+        } else {
+            startMin = "0" + String.valueOf(startMin);
+        }
 
         endTime = extras.getString("pushEndTime");
         endMin = extras.getString("pushEndMin");
+        if (Integer.parseInt(endMin) >= 10){
+            endMin = String.valueOf(endMin);
+        } else {
+            endMin = "0" + String.valueOf(endMin);
+        }
 
         tag = extras.getString("pushTag");
         id = extras.getString("pushID");

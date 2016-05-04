@@ -125,7 +125,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14pt"
+        android:textSize="12pt"
         android:fontFamily="Helvetica"
         android:id="@+id/busy"
         android:layout_centerHorizontal="true"
@@ -339,7 +339,8 @@
     android:layout_height="wrap_content"
     android:layout_below="@+id/middleRow"
     android:layout_centerHorizontal="true"
-    android:layout_margin="15dp">
+    android:layout_margin="15dp"
+        android:layout_alignParentBottom="true">
 
     <Button
         android:layout_width="wrap_content"

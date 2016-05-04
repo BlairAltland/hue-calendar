@@ -193,8 +193,11 @@ public class EventAddition extends AppCompatActivity {
 
         //Make the 24 hour time format to 12 hour time format
         int currentHour;
-        if (pHour > 11) {
+        if (pHour > 12) {
             currentHour = pHour - 12;
+        }
+        else if(pHour == 0){
+            currentHour = 12;
         } else {
             currentHour = pHour;
         }
@@ -296,8 +299,11 @@ public class EventAddition extends AppCompatActivity {
 
         //Make the 24 hour time format to 12 hour time format
         int currentHour2;
-        if (pHour2 > 11) {
+        if (pHour2 > 12) {
             currentHour2 = pHour2 - 12;
+        }
+        else if(pHour == 0){
+            currentHour2 = 12;
         } else {
             currentHour2 = pHour2;
         }
@@ -372,8 +378,11 @@ public class EventAddition extends AppCompatActivity {
 
                     //Make the 24 hour time format to 12 hour time format
                     int currentHour;
-                    if (hourOfDay > 11) {
+                    if (hourOfDay > 12) {
                         currentHour = hourOfDay - 12;
+                    }
+                    else if(pHour == 0){
+                        currentHour = 12;
                     } else {
                         currentHour = hourOfDay;
                     }
@@ -492,8 +501,11 @@ public class EventAddition extends AppCompatActivity {
 
                     //Make the 24 hour time format to 12 hour time format
                     int currentHour;
-                    if (hourOfDay > 11) {
+                    if (hourOfDay > 12) {
                         currentHour = hourOfDay - 12;
+                    }
+                    else if(hourOfDay == 0){
+                        currentHour = 12;
                     } else {
                         currentHour = hourOfDay;
                     }
@@ -650,7 +662,7 @@ public class EventAddition extends AppCompatActivity {
 
         PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
 
-        PHSchedule schedule = new PHSchedule(eventName.getText().toString());
+        PHSchedule schedule = new PHSchedule("schedule");
 
         PHLightState lightState = new PHLightState();
 

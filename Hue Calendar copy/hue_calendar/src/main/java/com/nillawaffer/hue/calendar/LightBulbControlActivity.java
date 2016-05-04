@@ -287,29 +287,6 @@ public class LightBulbControlActivity extends AppCompatActivity {
     }
 
 
-    public void setImageButtonResources(TextView label1, TextView label2, TextView label3, TextView label4,
-                                        TextView label5,TextView label6, TextView label7, TextView label8 ,TextView label9, TextView label10, TextView label11, TextView label12) {
-
-        //create array of all of the bulbs on the network
-        //loop through the array of bulbs and fill them with images
-        PHBridge bridge = phHueSDK.getSelectedBridge();
-
-        List<PHLight> allLights = bridge.getResourceCache().getAllLights();
-
-        TextView[] textViews = {label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12};
-
-        List<PHLight> Lights = allLights;
-
-        for (TextView text : textViews){
-
-            for (PHLight light : Lights) {
-
-                text.setText(light.getName());
-                Lights.remove(Lights.size() - 1);
-            }
-        }
-    }
-
     public void changeNameLabel(String name) {
 
         PHBridge bridge = phHueSDK.getSelectedBridge();

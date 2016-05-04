@@ -50,12 +50,15 @@
         //7
         <item android:id="@+id/find_new_bridge"
             android:title="@string/menu_find_bridge"
-            android:showAsAction="ifRoom"/>
+            app:showAsAction="ifRoom"/>
 
         //8
         <item android:id="@+id/PHbulbActivity"
             android:title="@string/light_bulbs"
             android:showAsAction="ifRoom"/>
+
+        //9
+
 
     </group>
 </menu>
